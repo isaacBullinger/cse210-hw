@@ -27,7 +27,7 @@ public class Prompt
         _prompts.Add("What did I accomplish today?");
         _prompts.Add("What is one thing that I am proud of that happened today?");
         _prompts.Add("What am I grateful for?");
-        _prompts.Add("What did you learn today?");
+        _prompts.Add("What did I learn today?");
 
         Random randomGenerator = new Random();
         int number = randomGenerator.Next(1, _prompts.Count);
