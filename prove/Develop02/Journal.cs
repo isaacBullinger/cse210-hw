@@ -24,9 +24,17 @@ public class Journal
 
     public void DisplayJournal()
     {
-        foreach (Entry _entry in _entries)
+        if (_entries.Count == 0)
         {
-            _entry.DisplayEntry();
+            Console.WriteLine("No entries found!");
+        }
+        
+        else
+        {
+            foreach (Entry _entry in _entries)
+            {
+                _entry.DisplayEntry();
+            }
         }
     }
 
@@ -39,7 +47,7 @@ public class Journal
         {
             foreach (Entry _entry in _entries)
             {
-                outputFile.WriteLine($"Date: {_entry._date} - Prompt: {_entry._prompt}\r\n{_entry._contents}");
+                outputFile.WriteLine($"{_entry._date}~{_entry._prompt}~{_entry._contents}");
             }
         }
     }
@@ -53,7 +61,15 @@ public class Journal
 
         foreach (string line in lines)
         {
-            Console.WriteLine(line);
+            Entry _entry = new Entry();
+
+            string[] parts = line.Split("~");
+
+            _entry._date = parts[0];
+            _entry._prompt = parts[1];
+            _entry._contents = parts[2];
+
+            _entries.Add(_entry);
         }
     }
 }
