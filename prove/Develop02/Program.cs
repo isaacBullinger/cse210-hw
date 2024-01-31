@@ -4,9 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        
-        Entry entry = new Entry();
-        entry.AddEntry();
-        
+        Journal newEntry = new Journal();
+        newEntry.WriteEntry();
+        newEntry.DisplayJournal();
     }
 }
