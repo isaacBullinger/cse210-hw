@@ -32,11 +32,28 @@ public class Journal
 
     public void SaveJournal()
     {
+        Console.WriteLine("What is the filename?");
         string fileName = Console.ReadLine();
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
-            //outputFile.WriteLine($"Date: {_entry._date} - Prompt: {_entry._prompt}\r\n{_entry._contents}");
+            foreach (Entry _entry in _entries)
+            {
+                outputFile.WriteLine($"Date: {_entry._date} - Prompt: {_entry._prompt}\r\n{_entry._contents}");
+            }
+        }
+    }
+
+    public void LoadJournal()
+    {
+        Console.WriteLine("What is the filename?");
+        string fileName = Console.ReadLine();
+
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+
+        foreach (string line in lines)
+        {
+            Console.WriteLine(line);
         }
     }
 }

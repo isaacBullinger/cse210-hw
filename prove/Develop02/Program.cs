@@ -7,5 +7,7 @@ class Program
         Journal newEntry = new Journal();
         newEntry.WriteEntry();
         newEntry.DisplayJournal();
+        newEntry.SaveJournal();
+        newEntry.LoadJournal();
     }
 }
