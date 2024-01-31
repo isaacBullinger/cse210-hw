@@ -24,6 +24,10 @@ public class Prompt
         _prompts.Add("What was the strongest emotion I felt today?");
         _prompts.Add("If I had one thing I could do over today, what would it be?");
         _prompts.Add("What was the funniest thing that happened today?");
+        _prompts.Add("What did I accomplish today?");
+        _prompts.Add("What is one thing that I am proud of that happened today?");
+        _prompts.Add("What am I grateful for?");
+        _prompts.Add("What did you learn today?");
 
         Random randomGenerator = new Random();
         int number = randomGenerator.Next(1, _prompts.Count);
