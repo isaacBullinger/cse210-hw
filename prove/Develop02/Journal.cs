@@ -1,3 +1,12 @@
+// Class: Journal
+// * _entries : List<Entry>
+
+// Behaviors:
+// * WriteEntry() : void
+// * DisplayJournal() : void
+// * SaveJournal() : void
+// * LoadJournal : void
+
 using System;
 using System.IO;
 
@@ -5,6 +14,8 @@ public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
 
+// This method generates the current date, a prompt,
+// and allows the user to input the contents of their entry.
     public void WriteEntry()
     {
         Entry entry = new Entry();
@@ -22,6 +33,9 @@ public class Journal
         _entries.Add(entry);
     }
 
+// This method checks the journal entries,
+// If populated it will iteratively display entries. 
+// If not populated an error message is given.
     public void DisplayJournal()
     {
         if (_entries.Count == 0)
@@ -38,6 +52,8 @@ public class Journal
         }
     }
 
+// This method asks the user to name the file they wish to save to.
+// Then it formats and saves the entries to a file for later retrieval.
     public void SaveJournal()
     {
         Console.WriteLine("What is the filename?");
@@ -52,6 +68,7 @@ public class Journal
         }
     }
 
+// This method allows the user to load a specified journal from a previously saved file.
     public void LoadJournal()
     {
         Console.WriteLine("What is the filename?");

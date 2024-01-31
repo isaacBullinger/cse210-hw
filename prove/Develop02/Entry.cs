@@ -1,23 +1,20 @@
-// REMEMBER .cs!
-
 // Class: Entry
 // * _date : DateTime
 // * _contents : string
-// * _prompts : List <string>
+// * _prompt : string
 
 // Behaviors:
-// * AddEntry () : string
+// * DisplayEntry () : string
 
 using System;
 
 public class Entry
 {
-    // Create date, contents, and prompt variables in the Entry class.
+    // Creates date, contents, and prompt variables in the Entry class.
     
     public string _contents;
     public string _date;
     public string _prompt;
-    public Entry entry;
 
     public void DisplayEntry()
     {  

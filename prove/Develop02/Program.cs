@@ -13,6 +13,8 @@ class Program
         while (menu == true)
         {
 
+            // Displays menu.
+
             Console.WriteLine("Please select one of the following choices:");
             Console.WriteLine("1. Write");
             Console.WriteLine("2. Display");
@@ -25,18 +27,24 @@ class Program
             {
                 newEntry.WriteEntry();
             }
+
             if (select == "2")
             {
                 newEntry.DisplayJournal();
             }
+
             if (select == "3")
             {
                 newEntry.LoadJournal();
             }
+
             if (select == "4")
             {
                 newEntry.SaveJournal();
             }
+
+            // Asks user for confirmation before closing.
+
             if (select == "5")
             {
                 Console.WriteLine("Do you really want to quit? (Type y/n)");
