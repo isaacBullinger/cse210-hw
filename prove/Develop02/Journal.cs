@@ -26,9 +26,9 @@ public class Journal
     {
         if (_entries.Count == 0)
         {
-            Console.WriteLine("No entries found!");
+            Console.WriteLine("No entries found! Please load file.");
         }
-        
+
         else
         {
             foreach (Entry _entry in _entries)
