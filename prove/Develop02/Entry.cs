@@ -22,9 +22,6 @@ public class Entry
 
     public string AddEntry()
     {  
-        _contents = Console.ReadLine();
-        _log.Add(_contents);
-
         DateTime today = DateTime.Now;
         _date = today.ToShortDateString();
         _log.Add(_date);
@@ -32,6 +29,9 @@ public class Entry
         Prompt prompt = new Prompt();
         Console.WriteLine(prompt.GivePrompt());
         _log.Add(_prompt);
+
+        _contents = Console.ReadLine();
+        _log.Add(_contents);
 
         return _entry;
     }
