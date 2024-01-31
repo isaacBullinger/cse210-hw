@@ -6,7 +6,7 @@
 // * _prompts : List <string>
 
 // Behaviors:
-// * _Display () : void
+// * AddEntry () : string
 
 using System;
 
@@ -26,12 +26,16 @@ public class Entry
         _date = today.ToShortDateString();
         _log.Add(_date);
 
-        Prompt prompt = new Prompt();
-        Console.WriteLine(prompt.GivePrompt());
-        _log.Add(_prompt);
+        Prompt _prompt = new Prompt();
+        string _newPrompt = _prompt.GivePrompt();
+        Console.WriteLine(_newPrompt);
+        _log.Add(_newPrompt);
 
         _contents = Console.ReadLine();
         _log.Add(_contents);
+
+        _entry = String.Format($"Date: {_date} - Prompt: {_newPrompt}\r\n{_contents}");
+        Console.WriteLine(_entry);
 
         return _entry;
     }
