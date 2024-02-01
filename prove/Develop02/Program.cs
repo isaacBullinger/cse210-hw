@@ -66,8 +66,12 @@ class Program
                 else if (confirm != "n" || confirm != "y")
                 {
                     menu = true;
-                    Console.WriteLine("Wrong input, try again...");
+                    Console.WriteLine("Wrong input, please type y or n.");
                 }
+            }
+            else
+            {
+                Console.WriteLine("Wrong input, please type 1, 2, 3, 4, or 5.");
             }
         }
     }
