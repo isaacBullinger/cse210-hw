@@ -2,6 +2,10 @@ using System;
 using System.ComponentModel.Design;
 using System.Net.Quic;
 
+// Creativity & Exceeding Core Requirements:
+// In Journal class, if there are no entries a
+// message shows that tells the user to load a file.
+
 class Program
 {
     static void Main(string[] args)
@@ -28,24 +32,25 @@ class Program
                 newEntry.WriteEntry();
             }
 
-            if (select == "2")
+            else if (select == "2")
             {
                 newEntry.DisplayJournal();
             }
 
-            if (select == "3")
+            else if (select == "3")
             {
                 newEntry.LoadJournal();
             }
 
-            if (select == "4")
+            else if (select == "4")
             {
                 newEntry.SaveJournal();
             }
 
+            // Creativity & Exceeding Core Requirements:
             // Asks user for confirmation before closing.
 
-            if (select == "5")
+            else if (select == "5")
             {
                 Console.WriteLine("Do you really want to quit? (Type y/n)");
                 string confirm = Console.ReadLine();
@@ -62,6 +67,9 @@ class Program
                         menu = false;
                     }
                 }
+
+                // Creativity & Exceeding Core Requirements:
+                // Error message if user types anything other than a y or n.
 
                 else if (confirm != "n" || confirm != "y")
                 {

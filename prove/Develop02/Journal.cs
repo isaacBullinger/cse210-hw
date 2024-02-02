@@ -16,6 +16,7 @@ public class Journal
 
 // This method generates the current date, a prompt,
 // and allows the user to input the contents of their entry.
+
     public void WriteEntry()
     {
         Entry entry = new Entry();
@@ -36,8 +37,12 @@ public class Journal
 // This method checks the journal entries,
 // If populated it will iteratively display entries. 
 // If not populated an error message is given.
+
     public void DisplayJournal()
     {
+        // Creativity & Exceeding Core Requirements:
+        // If there are no entries, this tells the user to load a file.
+
         if (_entries.Count == 0)
         {
             Console.WriteLine("No entries found! Please load file.");
@@ -54,6 +59,7 @@ public class Journal
 
 // This method asks the user to name the file they wish to save to.
 // Then it formats and saves the entries to a file for later retrieval.
+
     public void SaveJournal()
     {
         Console.WriteLine("What is the filename?");
