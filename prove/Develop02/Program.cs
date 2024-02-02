@@ -26,10 +26,12 @@ class Program
             Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
             select = Console.ReadLine();
+            Console.WriteLine();
 
             if (select == "1")
             {
                 newEntry.WriteEntry();
+                Console.WriteLine();
             }
 
             else if (select == "2")
@@ -54,6 +56,7 @@ class Program
             {
                 Console.WriteLine("Do you really want to quit? (Type y/n)");
                 string confirm = Console.ReadLine();
+                Console.WriteLine();
 
                 if (confirm == "n" || confirm == "y")
                 {

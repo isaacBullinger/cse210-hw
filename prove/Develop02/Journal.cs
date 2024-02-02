@@ -45,7 +45,7 @@ public class Journal
 
         if (_entries.Count == 0)
         {
-            Console.WriteLine("No entries found! Please load file.");
+            Console.WriteLine("No entries found! Please load file.\r\n");
         }
 
         else
@@ -64,6 +64,7 @@ public class Journal
     {
         Console.WriteLine("What is the filename?");
         string fileName = Console.ReadLine();
+        Console.WriteLine($"Saving {fileName}...\r\n");
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
@@ -79,6 +80,8 @@ public class Journal
     {
         Console.WriteLine("What is the filename?");
         string fileName = Console.ReadLine();
+
+        Console.WriteLine($"Loading {fileName}...\r\n");
 
         string[] lines = System.IO.File.ReadAllLines(fileName);
 
