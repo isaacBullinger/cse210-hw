@@ -2,7 +2,7 @@ using System;
 
 class Word
 {
-    static void Main(string[] args)
+    public void Hi()
     {
         Console.WriteLine("Hello Develop04 World!");
     }
