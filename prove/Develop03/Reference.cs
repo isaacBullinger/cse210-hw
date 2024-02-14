@@ -1,13 +1,13 @@
 using System;
 
-class Reference
+public class Reference
 {
-    private string _book;
-    private string _chapter;
-    private string _verse;
-    private int _end;
+    public string _book;
+    public string _chapter;
+    public string _verse;
+    public string _end;
     
-    public void DisplayReference();
+    public void DisplayReference()
     {
         Console.WriteLine($"{_book} {_chapter}:{_verse}");
     }
