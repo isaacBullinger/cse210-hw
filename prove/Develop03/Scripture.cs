@@ -1,18 +1,34 @@
 using System;
+using System.Text.Encodings.Web;
 
 class Scripture
 {
-    private Reference _reference;
+    private List<string> _texts = new List<string>();
     
-    private string _proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
-    private string _proverbs6 = "In all thy ways acknowledge him, and he shall direct thy paths.";
 
     //string.split
-    public string GetText()
+    public List<string> GetText()
     {
         Reference reference = new Reference(5,6);
-        string text = $"{reference.GetText()} {_proverbs5} {_proverbs6}";
+        List<string> texts = new List<string>();
+        
+        //string text = $"{reference.GetText()} {_proverbs5} {_proverbs6}";
+        Console.WriteLine(reference.GetText());
+//        Console.WriteLine(_proverbs5);
+//        Console.WriteLine(_proverbs6);
+//        texts.Add(_proverbs5);
+//        texts.Add(_proverbs6);
 
-        return text;
+        return texts;
+    }
+
+    public void HideWords()
+    {
+
+    }
+
+    public void CompleteHide()
+    {
+
     }
 }

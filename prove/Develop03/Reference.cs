@@ -5,7 +5,7 @@ public class Reference
     private string _book;
     private int _chapter;
     private int _verse;
-    private int _end;
+    private int _end = 0;
 
     public Reference(int verse)
     {
@@ -24,14 +24,16 @@ public class Reference
 
     public string GetText()
     {
+        string text;
         // Check if there is and end.
-        string text = $"{_book} {_chapter}:{_verse} {_end}";
-        return text;
-    }
-
-    public string GetMultiText()
-    {
-        string text = $"{_book} {_chapter}:{_verse}-{_end}";
+        if (_end ==0)
+        {
+            text = $"{_book} {_chapter}:{_verse}";
+        }
+        else
+        {
+            text = $"{_book} {_chapter}:{_verse}-{_end}";
+        }
         return text;
     }
 }
