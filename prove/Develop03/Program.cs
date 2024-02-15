@@ -4,11 +4,21 @@ class Program
 {
     static void Main(string[] args)
     {
-        Reference reference1 = new Reference();
-        reference1._book = "Alma";
-        reference1._chapter = "32";
-        reference1._verse = "1";
+        bool quit = false;
+        string confirm;
 
-        reference1.DisplayReference();
+        while (quit == false)
+            {
+                Scripture scripture = new Scripture();
+                Console.WriteLine($"{scripture.GetText()}\r\n");
+                Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
+                confirm = Console.ReadLine();
+
+                if (confirm == "quit")
+                    {
+                        quit = true;
+                    }
+                Console.Clear();
+            }
     }
 }
