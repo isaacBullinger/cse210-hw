@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 class Program
@@ -6,6 +7,7 @@ class Program
     static void Main(string[] args)
     {
         bool quit = false;
+        bool complete = false;
         int count = 0;
         string confirm;
         string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
@@ -13,7 +15,7 @@ class Program
         Reference reference = new Reference(5,6);
         Scripture scripture = new Scripture(5,6,proverbs5,proverbs6);
         
-        while (quit == false)
+        while (quit == false && complete == false)
         {
             Console.Clear();
 
@@ -40,6 +42,9 @@ class Program
                 {
                     quit = true;
                 }
+
+            complete = scripture.CompleteHide();
+
         }
 
     }

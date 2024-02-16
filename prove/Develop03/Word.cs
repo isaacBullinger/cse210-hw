@@ -13,6 +13,7 @@ class Word
         _isHidden = false;
     }
 
+    // count word then put underscores
     public string Hide()
     {
         _isHidden = true;
@@ -25,32 +26,19 @@ class Word
         return _word;
     }
 
-    // count word then put underscores
     public string Show()
     {
         string word = _word;
         return word;
     }
 
-//    public string IsHidden()
-//    {
-//        if (_isHidden == true)
-//        {
-//            foreach (char letter in _word)
-//            {
-//                Console.Write("_");
-//            }
-//        }
-//        return _word;
-//    }
-
-//    public void GetText()
-//    {
-
-//    }
+    public bool IsHidden()
+    {
+        bool isHidden = _isHidden;
+        return isHidden;
+    }
 
     // display word method
-
     //check if words are hidden then choose words
     //select 3 random numbers in the list
 }

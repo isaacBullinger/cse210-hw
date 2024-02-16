@@ -53,55 +53,26 @@ class Scripture
 
         for (int i = 0; i < 3; i++)
         {
-            int random = randomGenerator.Next(1,_words.Count);
+            int random = randomGenerator.Next(0,_words.Count);
             _words[random].Hide();
         }
     }
 
-//    public bool CompleteHide()
-//    {
-//        if ()
-//
-//        return allHidden;
-//    }
+    public bool CompleteHide()
+    {
+        bool allHidden =false;
+        foreach (Word word in _words)
+        {
+            if (word.IsHidden() == true)
+            {
+                allHidden = true;
+            }
+            else
+            {
+                allHidden = false;
+                break;
+            }
+        }
+        return allHidden;
+    }
 }
-
-        //string text = $"{reference.GetText()} {_proverbs5} {_proverbs6}";
-//        Console.WriteLine(_proverbs5);
-//        Console.WriteLine(_proverbs6);
-//        texts.Add(_proverbs5);
-//        texts.Add(_proverbs6);
-
-//        Reference reference = new Reference(firstVerse);
-//        List<Word> texts = new List<Word>();
-//        Console.Write(reference.GetText());
-
-//        string[] scriptureWords = _proverbs5.Split(" ");
-//        foreach (string word in scriptureWords) 
-//        {
-//            words.Add(new Word(word));
-//            Console.Write($" {word}");
-//        }
-//        if (secondVerse > 0)
-//        {
-//            string[] scriptureWords2;
-//            scriptureWords2 = _proverbs6.Split(" ");
-//            foreach (string word in scriptureWords2)
-//            {
-//                words.Add(new Word(word));
-//                Console.Write($" {word}");
-//            }
-//        }
-//        return texts;
-//    }
-
-//    public void HideWords()
-//    {
-
-//    }
-
-//    public void CompleteHide()
-//    {
-
-//    }
-

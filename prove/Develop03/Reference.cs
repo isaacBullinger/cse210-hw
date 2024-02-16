@@ -36,10 +36,4 @@ public class Reference
         }
         return text;
     }
-
-    public int GetEnd()
-    {
-        int end = _end;
-        return end;
-    }
 }
