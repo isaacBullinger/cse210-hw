@@ -9,13 +9,11 @@ using System.Text.Encodings.Web;
 
 class Scripture
 {
-    private int _verse;
-    private int _end;
     private List<Word> _words = new List<Word>();
 
-    public Scripture(int _verse, string text)
+    public Scripture(int verse, string text)
     {
-        Reference reference = new Reference(_verse);
+        Reference reference = new Reference(verse);
         string[] scriptureWords = text.Split(" ");
         foreach (string word in scriptureWords) 
         {
@@ -23,9 +21,9 @@ class Scripture
         }
     }
 
-    public Scripture(int _verse, int _end, string text, string text0)
+    public Scripture(int verse, int end, string text, string text0)
     {
-        Reference reference = new Reference(_verse, _end);
+        Reference reference = new Reference(verse, end);
         string[] scriptureWords = text.Split(" ");
         foreach (string word in scriptureWords) 
         {
