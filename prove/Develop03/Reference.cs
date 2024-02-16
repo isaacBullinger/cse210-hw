@@ -9,7 +9,7 @@ public class Reference
 
     public Reference(int verse)
     {
-        _book = "Proverbs";
+        _book = "Proverbs"; 
         _chapter = 3; 
         _verse = verse;
     }
@@ -35,5 +35,11 @@ public class Reference
             text = $"{_book} {_chapter}:{_verse}-{_end}";
         }
         return text;
+    }
+
+    public int GetEnd()
+    {
+        int end = _end;
+        return end;
     }
 }

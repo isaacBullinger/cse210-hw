@@ -12,27 +12,32 @@ class Program
         List<Word> words = new List<Word>();
         int firstVerse = 5;
         int secondVerse = 6;
-        string[] scriptureWords2;
-
         Reference reference = new Reference(firstVerse,secondVerse);
-        List<string> texts = new List<string>();
+        Scripture scripture = new Scripture(firstVerse,secondVerse,proverbs5,proverbs6);
+        
         Console.Write(reference.GetText());
+        scripture.GetText();
 
-        string[] scriptureWords = proverbs5.Split(" ");
-        foreach (string word in scriptureWords) 
-        {
-            words.Add(new Word(word));
-            Console.Write($" {word}");
-        }
-        if (secondVerse > 0)
-        {
-            scriptureWords2 = proverbs6.Split(" ");
-            foreach (string word in scriptureWords2)
-            {
-                words.Add(new Word(word));
-                Console.Write($" {word}");
-            }
-        }
+
+//        Reference reference = new Reference(firstVerse);
+//        List<string> texts = new List<string>();
+//        Console.Write(reference.GetText());
+
+//        string[] scriptureWords = proverbs5.Split(" ");
+//        foreach (string word in scriptureWords) 
+//        {
+//            words.Add(new Word(word));
+//            Console.Write($" {word}");
+//        }
+//        if (secondVerse > 0)
+//        {
+//            scriptureWords2 = proverbs6.Split(" ");
+//            foreach (string word in scriptureWords2)
+//            {
+//                words.Add(new Word(word));
+//                Console.Write($" {word}");
+//            }
+//        }
 
 
 //        while (quit == false)

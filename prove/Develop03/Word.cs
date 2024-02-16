@@ -13,30 +13,35 @@ class Word
         _isHidden = false;
     }
 
-    public List<string> GetText()
-    {
-        Scripture scripture = new Scripture();
-        List<string> text = scripture.GetText();
-
+    // public string GetText()
+    //{
         
-        return text;
-    }
+        
+    //    return text;
+    //}
     
-    public void Hide()
+    public void Hide(int count)
     {
         List<int> selection = new List<int>();
-        int select;
+        Random randomGenerator = new Random();
+        for (int i=0; i < 3; i++)
+        {
+            int select = randomGenerator.Next(1,count);
+            selection.Add(select);
+            Console.WriteLine(select);
+        }
 
 
         // count word then put underscores
         
     }
 
-    // display word method
-    public void Show()
+    public string Show()
     {
-
+        string word = _word;
+        return word;
     }
+    // display word method
 
     //check if words are hidden then choose words
     //select 3 random numbers in the list
