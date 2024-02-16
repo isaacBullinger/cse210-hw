@@ -54,8 +54,7 @@ class Scripture
         for (int i = 0; i < 3; i++)
         {
             int random = randomGenerator.Next(1,_words.Count);
-            Console.Write($"{_words[random].Hide()}");
-            //Console.WriteLine(random);
+            _words[random].Hide();
         }
     }
 
