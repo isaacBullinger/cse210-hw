@@ -1,15 +1,19 @@
 using System;
+using System.ComponentModel;
 using System.Configuration.Assemblies;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.Encodings.Web;
 
 class Scripture
 {
+    private int _verse;
+    private int _end;
     private List<Word> _words = new List<Word>();
 
-    public Scripture(int verse, string text)
+    public Scripture(int _verse, string text)
     {
-        Reference reference = new Reference(verse);
+        Reference reference = new Reference(_verse);
         string[] scriptureWords = text.Split(" ");
         foreach (string word in scriptureWords) 
         {
@@ -17,9 +21,9 @@ class Scripture
         }
     }
 
-    public Scripture(int verse, int end, string text, string text0)
+    public Scripture(int _verse, int _end, string text, string text0)
     {
-        Reference reference = new Reference(verse, end);
+        Reference reference = new Reference(_verse, _end);
         string[] scriptureWords = text.Split(" ");
         foreach (string word in scriptureWords) 
         {
@@ -40,6 +44,33 @@ class Scripture
             Console.Write($" {word.Show()}");
         }
     }
+
+    public void HideWords()
+    {
+        List<Word> selection = new List<Word>();
+        Random randomGenerator = new Random();
+
+        foreach (Word word in _words)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                List<string> randoms = new List<string>();
+                int index = randomGenerator.Next(1,_words.Count);
+                Word random = _words[index];
+                selection.Add(random);
+            }
+
+            if (random == _words[index])
+            {
+                _words[index].Hide();
+            }
+            else
+            {
+                _words[index].Show();
+            }
+        }
+    }
+}
 
         //string text = $"{reference.GetText()} {_proverbs5} {_proverbs6}";
 //        Console.WriteLine(_proverbs5);
@@ -79,4 +110,4 @@ class Scripture
 //    {
 
 //    }
-}
+

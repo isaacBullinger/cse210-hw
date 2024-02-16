@@ -4,6 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
+        string word = "Hello";
+
+        foreach (int letter in word)
+        {
+            Console.Write("_");
+        }
     }
 }

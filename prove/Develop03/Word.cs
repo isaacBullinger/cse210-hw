@@ -13,34 +13,33 @@ class Word
         _isHidden = false;
     }
 
-    // public string GetText()
-    //{
-        
-        
-    //    return text;
-    //}
-    
-    public void Hide(int count)
+    public void Hide()
     {
-        List<int> selection = new List<int>();
-        Random randomGenerator = new Random();
-        for (int i=0; i < 3; i++)
+        _isHidden = true;
+        foreach (char letter in _word)
         {
-            int select = randomGenerator.Next(1,count);
-            selection.Add(select);
-            Console.WriteLine(select);
+            _word.Replace(letter,'_');
         }
-
-
-        // count word then put underscores
-        
     }
 
+    // count word then put underscores
     public string Show()
     {
         string word = _word;
         return word;
     }
+
+    public void IsHidden()
+    {
+        if (_isHidden == true)
+        {
+            foreach (char letter in _word)
+            {
+                _word.Replace(letter,'_');
+            }
+        }
+    }
+
     // display word method
 
     //check if words are hidden then choose words

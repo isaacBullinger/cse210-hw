@@ -10,48 +10,25 @@ class Program
         string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
         string proverbs6 = "In all thy ways acknowledge him, and he shall direct thy paths.";
         List<Word> words = new List<Word>();
-        int firstVerse = 5;
-        int secondVerse = 6;
-        Reference reference = new Reference(firstVerse,secondVerse);
-        Scripture scripture = new Scripture(firstVerse,secondVerse,proverbs5,proverbs6);
+        Reference reference = new Reference(5,6);
+        Scripture scripture = new Scripture(5,6,proverbs5,proverbs6);
         
-        Console.Write(reference.GetText());
-        scripture.GetText();
+        while (quit == false)
+        {
+            Console.Write(reference.GetText());
+            scripture.GetText();
+            confirm = Console.ReadLine();
 
+            Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
+            confirm = Console.ReadLine();
+            scripture.HideWords();
 
-//        Reference reference = new Reference(firstVerse);
-//        List<string> texts = new List<string>();
-//        Console.Write(reference.GetText());
+            if (confirm == "quit")
+                {
+                    quit = true;
+                }
+            Console.Clear();
+        }
 
-//        string[] scriptureWords = proverbs5.Split(" ");
-//        foreach (string word in scriptureWords) 
-//        {
-//            words.Add(new Word(word));
-//            Console.Write($" {word}");
-//        }
-//        if (secondVerse > 0)
-//        {
-//            scriptureWords2 = proverbs6.Split(" ");
-//            foreach (string word in scriptureWords2)
-//            {
-//                words.Add(new Word(word));
-//                Console.Write($" {word}");
-//            }
-//        }
-
-
-//        while (quit == false)
-//            {
-//                Scripture scripture = new Scripture();
-//                Console.WriteLine($"{scripture.GetText()}\r\n");
-//                Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
-//                confirm = Console.ReadLine();
-//
-//                if (confirm == "quit")
-//                    {
-//                        quit = true;
-//                    }
-//                Console.Clear();
-//            }
     }
 }
