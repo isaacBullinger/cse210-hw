@@ -6,9 +6,11 @@ class Program
     {
         string word = "Hello";
 
-        foreach (int letter in word)
+        word = "";
+        foreach (char letter in word)
         {
-            Console.Write("_");
+            word += "_";
         }
+        Console.Write(word);
     }
 }

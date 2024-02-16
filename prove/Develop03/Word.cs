@@ -13,13 +13,16 @@ class Word
         _isHidden = false;
     }
 
-    public void Hide()
+    public string Hide()
     {
         _isHidden = true;
-        foreach (char letter in _word)
+        string word = "";
+        for (int i = 0; i < _word.Length; i++)
         {
-            _word.Replace(letter,'_');
+            word += "_";
         }
+        _word = word;
+        return _word;
     }
 
     // count word then put underscores
@@ -29,16 +32,22 @@ class Word
         return word;
     }
 
-    public void IsHidden()
-    {
-        if (_isHidden == true)
-        {
-            foreach (char letter in _word)
-            {
-                _word.Replace(letter,'_');
-            }
-        }
-    }
+//    public string IsHidden()
+//    {
+//        if (_isHidden == true)
+//        {
+//            foreach (char letter in _word)
+//            {
+//                Console.Write("_");
+//            }
+//        }
+//        return _word;
+//    }
+
+//    public void GetText()
+//    {
+
+//    }
 
     // display word method
 

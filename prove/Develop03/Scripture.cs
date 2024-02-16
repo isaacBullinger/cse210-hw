@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Configuration.Assemblies;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text.Encodings.Web;
 
 class Scripture
@@ -47,29 +49,22 @@ class Scripture
 
     public void HideWords()
     {
-        List<Word> selection = new List<Word>();
         Random randomGenerator = new Random();
 
-        foreach (Word word in _words)
+        for (int i = 0; i < 3; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                List<string> randoms = new List<string>();
-                int index = randomGenerator.Next(1,_words.Count);
-                Word random = _words[index];
-                selection.Add(random);
-            }
-
-            if (random == _words[index])
-            {
-                _words[index].Hide();
-            }
-            else
-            {
-                _words[index].Show();
-            }
+            int random = randomGenerator.Next(1,_words.Count);
+            Console.Write($"{_words[random].Hide()}");
+            //Console.WriteLine(random);
         }
     }
+
+//    public bool CompleteHide()
+//    {
+//        if ()
+//
+//        return allHidden;
+//    }
 }
 
         //string text = $"{reference.GetText()} {_proverbs5} {_proverbs6}";
