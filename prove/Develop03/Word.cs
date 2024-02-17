@@ -13,7 +13,7 @@ class Word
         _isHidden = false;
     }
 
-    // count word then put underscores
+    // Counts letters in the word word then puts underscores.
     public string Hide()
     {
         _isHidden = true;
@@ -37,8 +37,4 @@ class Word
         bool isHidden = _isHidden;
         return isHidden;
     }
-
-    // display word method
-    //check if words are hidden then choose words
-    //select 3 random numbers in the list
 }

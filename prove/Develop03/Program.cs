@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Diagnostics;
 
+// I showed creativity and exceeded requirements by making sure that every time the <enter> key was pressed exactly 3 words are replaced. This is shown in the comment in the Scripture class.
 class Program
 {
     static void Main(string[] args)

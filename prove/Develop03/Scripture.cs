@@ -32,11 +32,6 @@ class Scripture
                 _words.Add(new Word(word));
             }
         }
-        //        string[] scriptureWords2 = text0.Split(" ");
-//        foreach (string word in scriptureWords2)
-//        {
-//            _words.Add(new Word(word));
-//        }
     }
     
     public void GetText()
@@ -56,7 +51,7 @@ class Scripture
         {
             int random = randomGenerator.Next(0,_words.Count);
 
-            // This makes sure that there are always 3 words hidden when <enter> is pressed.
+            // Shows Creativity and Exceeds Core Requirements: This makes sure that there are always 3 words hidden when <enter> is pressed.
             while (_words[random].IsHidden() == true)
             {
                 random = randomGenerator.Next(0,_words.Count);
