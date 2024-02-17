@@ -6,7 +6,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        // /3?
         // list for scriptures
         bool quit = false;
         bool complete = false;

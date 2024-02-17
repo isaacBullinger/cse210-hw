@@ -50,6 +50,13 @@ class Scripture
         for (int i = 0; i < 3; i++)
         {
             int random = randomGenerator.Next(0,_words.Count);
+
+            // This makes sure that there are always 3 words hidden when <enter> is pressed.
+            while (_words[random].IsHidden() == true)
+            {
+                random = randomGenerator.Next(0,_words.Count);
+            }
+
             _words[random].Hide();
         }
     }
