@@ -6,6 +6,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        // /3?
+        // list for scriptures
         bool quit = false;
         bool complete = false;
         int count = 0;
@@ -13,7 +15,7 @@ class Program
         string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
         string proverbs6 = "In all thy ways acknowledge him, and he shall direct thy paths.";
         Reference reference = new Reference(5,6);
-        Scripture scripture = new Scripture(5,6,proverbs5,proverbs6);
+        Scripture scripture = new Scripture(reference,proverbs5,proverbs6);
         
         while (quit == false && complete == false)
         {
