@@ -12,7 +12,7 @@ class Program
         int count = 0;
         List<string> verses = new List<string>();
         string confirm;
-        string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding. ";
+        string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
         string proverbs6 = "In all thy ways acknowledge him, and he shall direct thy paths. ";
         Reference reference = new Reference(5,6);
         verses.Add(proverbs5);
