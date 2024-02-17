@@ -12,11 +12,15 @@ class Program
         bool complete = false;
         int count = 0;
         string confirm;
+        List<string> scriptures = new List<string>();
         string proverbs5 = "Trust in the Lord with all thine heart; and lean not unto thine own understanding.";
         string proverbs6 = "In all thy ways acknowledge him, and he shall direct thy paths.";
         Reference reference = new Reference(5,6);
         Scripture scripture = new Scripture(reference,proverbs5,proverbs6);
         
+        scriptures.Add(proverbs5);
+        scriptures.Add(proverbs6);
+
         while (quit == false && complete == false)
         {
             Console.Clear();
