@@ -20,19 +20,22 @@ class Scripture
         }
     }
 
-    public Scripture(Reference reference, string text, string text0)
+    public Scripture(Reference reference, List<string> scriptures)
     {
-        string[] scriptureWords = text.Split(" ");
-        foreach (string word in scriptureWords) 
+        
+        foreach (string verse in scriptures)
         {
-            _words.Add(new Word(word));
+            string[] scriptureWords = verse.Split(" ");
+            foreach (string word in scriptureWords)
+            {
+                _words.Add(new Word(word));
+            }
         }
-
-        string[] scriptureWords2 = text0.Split(" ");
-        foreach (string word in scriptureWords2)
-        {
-            _words.Add(new Word(word));
-        }
+        //        string[] scriptureWords2 = text0.Split(" ");
+//        foreach (string word in scriptureWords2)
+//        {
+//            _words.Add(new Word(word));
+//        }
     }
     
     public void GetText()
@@ -54,16 +57,18 @@ class Scripture
             // This makes sure that there are always 3 words hidden when <enter> is pressed.
             while (_words[random].IsHidden() == true)
             {
-                random = randomGenerator.Next(0,_words.Count);
+                if (_words[random].IsHidden() == true)
+                {
+                    random = randomGenerator.Next(0,_words.Count);
+                }
             }
-
             _words[random].Hide();
         }
     }
 
     public bool CompleteHide()
     {
-        bool allHidden =false;
+        bool allHidden = false;
         foreach (Word word in _words)
         {
             if (word.IsHidden() == true)
@@ -74,6 +79,21 @@ class Scripture
             {
                 allHidden = false;
                 break;
+            }
+        }
+        return allHidden;
+    }
+
+    public bool HideTracker()
+    {
+        int count = 0;
+        bool allHidden = false;
+
+        foreach (Word word in _words)
+        {
+            if (word.IsHidden() == true)
+            {
+                count += count;
             }
         }
         return allHidden;
