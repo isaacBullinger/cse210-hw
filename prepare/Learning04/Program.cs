@@ -12,7 +12,7 @@ class Program
         Console.WriteLine($"{assignment.GetSummary()}\r\n");
 
         Console.WriteLine(math.GetSummary());
-        Console.WriteLine($"{math.GetHomeworkList()}r\n");
+        Console.WriteLine($"{math.GetHomeworkList()}\r\n");
 
         Console.WriteLine(writing.GetSummary());
         Console.WriteLine(writing.GetWritingInfo());
