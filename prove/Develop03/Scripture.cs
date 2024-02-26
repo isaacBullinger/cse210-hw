@@ -45,40 +45,52 @@ class Scripture
     public void HideWords()
     {
         Random randomGenerator = new Random();
-        bool allHidden = false;
+//        bool allHidden = false;
 
-        for (int i = 0; i < 3; i++)
-        {
-            int random = randomGenerator.Next(0,_words.Count);
+//        for (int i = 0; i < 3; i++)
+//        {
+//            int random = randomGenerator.Next(0,_words.Count);
 
+            
             // Shows Creativity and Exceeds Core Requirements: This makes sure that there are always 3 words hidden when <enter> is pressed.
-            while (_words[random].IsHidden() == true)
+//            while (_words[random].IsHidden() == true)
+//            {
+//                random = randomGenerator.Next(0,_words.Count);
+//
+//                // This makes sure that the while loop breaks!
+//                foreach (Word word in _words)
+//                {
+//                    if (word.IsHidden() == true)
+//                    {
+//                        allHidden = true;
+//                    }
+//
+//                    else
+//                    {
+//                        allHidden = false;
+//                        break;
+//                    }
+//                }
+//
+//                if (allHidden == true)
+//                {
+//                    break;
+//                }
+//            }
+//            _words[random].Hide();
+//        }
+//    }
+
+        int random = randomGenerator.Next(0, _words.Count);
+
+        for (int i = 0; i < 3 && !CompleteHide(); ++i)
+        {
+            while(_words[random].IsHidden() == true)
             {
-                random = randomGenerator.Next(0,_words.Count);
-
-                // This makes sure that the while loop breaks!
-                foreach (Word word in _words)
-                {
-                    if (word.IsHidden() == true)
-                    {
-                        allHidden = true;
-                    }
-
-                    else
-                    {
-                        allHidden = false;
-                        break;
-                    }
-                }
-
-                if (allHidden == true)
-                {
-                    break;
-                }
+                random = randomGenerator.Next(0, _words.Count);
             }
             _words[random].Hide();
         }
-
     }
 
     public bool CompleteHide()
