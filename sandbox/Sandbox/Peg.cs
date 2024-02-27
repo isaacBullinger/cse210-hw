@@ -24,6 +24,12 @@ public class Peg
         return _status;
     }
 
+    public string ShipStatus()
+    {
+        _status = "O";
+        return _status;
+    }
+
     public string MissStatus()
     {
         _status = "M";

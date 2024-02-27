@@ -40,6 +40,10 @@ public class Display
         _hRow.GetDisplayRow("H");
         _iRow.GetDisplayRow("I");
         _jRow.GetDisplayRow("J");
+    }
+
+    public void CheckDisplayRows()
+    {
         
     }
 }
