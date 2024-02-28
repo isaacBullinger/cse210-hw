@@ -4,21 +4,31 @@ public class Activity
     private string _name;
     private string _description;
 
-    public Activity(int time, string name, string description)
+    public Activity()
+    {
+        _time = 30;
+        _name = "Generic Name";
+        _description = "Put description here...";
+    }
+
+    public void SetTime(int time)
     {
         _time = time;
+    }
+
+    public int GetTime()
+    {
+        return _time;
+    }
+
+    public void SetName(string name)
+    {
         _name = name;
+    }
+
+    public void SetDescription(string description)
+    {
         _description = description;
-    }
-
-    public string GetName()
-    {
-        return _name;
-    }
-
-    public string GetDescription()
-    {
-        return _name;
     }
 
     public int StartMessage()
@@ -35,30 +45,41 @@ public class Activity
 
     public void EndMessage()
     {
-        Console.WriteLine("Well done!");
-        PauseAnimation();
+        Console.WriteLine("\r\nWell done!");
+        PauseAnimation(2);
+        Console.WriteLine();
         Console.WriteLine($"You have completed another {_time} seconds of the {_name} Activity.");
-        PauseAnimation();
+        PauseAnimation(2);
+        Console.Clear();
     }
 
-    public void PauseAnimation()
+    public void PauseAnimation(int seconds)
     {
-        for (int i = 0; i < 4; i ++)
+        List<string> animations = new List<string>();
+        animations.Add("-");
+        animations.Add(@"\");
+        animations.Add("|");
+        animations.Add("/");
+        
+        DateTime start = DateTime.Now;
+        DateTime end = start.AddSeconds(seconds);
+        
+        int i = 0;
+
+        while (DateTime.Now < end)
         {
-            Console.Write("-");
+            string s = animations[i];
+            Console.Write(s);
             Thread.Sleep(500);
             Console.Write("\b \b");
-            Console.Write(@"\");
-            Thread.Sleep(500);
-            Console.Write("\b \b");
-            Console.Write("|");
-            Thread.Sleep(500);
-            Console.Write("\b \b");
-            Console.Write("/");
-            Thread.Sleep(500);
-            Console.Write("\b \b");
+
+            i++;
+
+            if (i >= animations.Count())
+            {
+                i = 0;
+            }
         }
-        Console.WriteLine();
     }
     public void PauseTimer(int time)
     {
