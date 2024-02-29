@@ -22,11 +22,10 @@ public class Reflecting : Activity
         int number = random.Next(1, _prompts.Count);
         string prompt = _prompts[number];
 
-        Console.WriteLine("Consider the following prompt: \r\n");
         Console.Write($" ---{prompt}---\r\n \r\n");
     }
 
-    public void DisplayQuestion()
+    public List<string> GetQuestions()
     {
         _questions.Add("Why was this experience meaningful to you? ");
         _questions.Add("Have you ever done anything like this before? ");
@@ -38,12 +37,7 @@ public class Reflecting : Activity
         _questions.Add("What did you learn about yourself through this experience? ");
         _questions.Add("How can you keep this experience in mind in the future? ");
 
-        Random random = new Random();
-        int number = random.Next(1, _prompts.Count);
-        string question = _questions[number];
-
-        Console.Write("> ");
-        Console.Write($"{question}\r\n");
+        return _questions;
     }
 
     public void RunReflecting()
@@ -51,6 +45,7 @@ public class Reflecting : Activity
         Console.WriteLine("Get ready...");
         PauseAnimation(2);
         Console.WriteLine();
+        Console.WriteLine("Consider the following prompt: \r\n");
         DisplayPrompt();
         Console.WriteLine("When you have something in mind, press enter to continue.");
         Console.ReadLine();
@@ -59,14 +54,29 @@ public class Reflecting : Activity
         Console.Write("You may begin in: ");
         PauseTimer(3);
         Console.Clear();
+        DisplayPrompt();
 
-        
         DateTime start = DateTime.Now;
         DateTime end = start.AddSeconds(GetTime());
-        while (DateTime.Now < end)
+
+        List<string> questions = GetQuestions();
+        Random random = new Random();
+
+        // Made sure that there are no repeat questions.
+        while (DateTime.Now < end || questions.Count() == 0)
         {
-            DisplayQuestion();
-            PauseAnimation(10);
+            int number = random.Next(0, questions.Count());
+            if (questions.Count() > 0)
+            {
+                string question = questions[number];
+                Console.WriteLine($"> {question}");
+                PauseAnimation(10);
+                questions.RemoveAt(number);
+            }
+            else
+            {
+                break;
+            }
         }
 
         EndMessage();

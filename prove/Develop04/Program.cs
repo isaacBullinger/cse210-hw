@@ -3,9 +3,9 @@ using System.Globalization;
 
 class Program
 {
+    // Showing creativity and exceeding requirements: Made sure that there are no repeat questions in the Reflecting Activity. Also put an end message with a spinner when quitting.
     static void Main(string[] args)
     {
-        int time = 10;
         bool menu = true;
         string select = "0";
 
@@ -38,8 +38,12 @@ class Program
                 listing.RunListing();
             }
             
+            // End message with spinner:
             else if (select == "4")
             {
+                Activity activity = new Activity();
+                Console.WriteLine("Have a great day!");
+                activity.PauseAnimation(5);
                 menu = false;
             }
         }

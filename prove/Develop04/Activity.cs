@@ -91,9 +91,4 @@ public class Activity
         }
         Console.WriteLine();
     }
-
-    public void RunActivity()
-    {
-
-    }
 }
