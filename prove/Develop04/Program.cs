@@ -46,6 +46,11 @@ class Program
                 activity.PauseAnimation(5);
                 menu = false;
             }
+
+            else
+            {
+                Console.WriteLine("Please select a number (1-4).");
+            }
         }
     }
 }

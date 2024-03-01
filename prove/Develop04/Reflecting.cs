@@ -73,6 +73,7 @@ public class Reflecting : Activity
                 PauseAnimation(10);
                 questions.RemoveAt(number);
             }
+
             else
             {
                 break;
