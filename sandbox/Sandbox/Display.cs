@@ -2,48 +2,54 @@ using System;
 
 public class Display
 {
-    private Row _aRow = new Row();
-    private Row _bRow = new Row();
-    private Row _cRow = new Row();
-    private Row _dRow = new Row();
-    private Row _eRow = new Row();
-    private Row _fRow = new Row();
-    private Row _gRow = new Row();
-    private Row _hRow = new Row();
-    private Row _iRow = new Row();
-    private Row _jRow = new Row();
-    private List<Row> _rows = new List<Row>();
-
-    public Display()
+    private String[,] _board = new String[10, 10];
+    private String[,] _display = new String[10, 10];
+    private string _letters = "ABCDEFGHIJ";
+    
+    public void PopulateBoard()
     {
-        _rows.Add(_aRow);
-        _rows.Add(_bRow);
-        _rows.Add(_cRow);
-        _rows.Add(_dRow);
-        _rows.Add(_eRow);
-        _rows.Add(_fRow);
-        _rows.Add(_gRow);
-        _rows.Add(_hRow);
-        _rows.Add(_iRow);
-        _rows.Add(_jRow);
+        string space = " ";
+        for (int i = 0; i < _board.GetLength(0); i++)
+        {
+            Console.Write(space);
+            space = space + " ";
+            Console.Write(@$" \ \{_letters[i]}");
+            for (int j = 0; j < _board.GetLength(1); j++)
+            {
+                Console.Write(@"\");
+                _board[i, j] = "~";
+                Console.Write($"{_board[i, j]}");
+                Console.Write(@"\");
+            }
+            Console.Write(@"\");
+            Console.WriteLine();
+        }
+        Console.WriteLine(@"            \ \_______________________________\");
+        Console.WriteLine(@"             \|___________BATTLESHIP___________|");
     }
 
-    public void UserDisplay()
+    public void PopulateDisplay()
     {
-        _aRow.GetDisplayRow("A");
-        _bRow.GetDisplayRow("B");
-        _cRow.GetDisplayRow("C");
-        _dRow.GetDisplayRow("D");
-        _eRow.GetDisplayRow("E");
-        _fRow.GetDisplayRow("F");
-        _gRow.GetDisplayRow("G");
-        _hRow.GetDisplayRow("H");
-        _iRow.GetDisplayRow("I");
-        _jRow.GetDisplayRow("J");
-    }
+        Console.WriteLine(" ________________________________");
+        Console.WriteLine($@"|\_______________________________\");
+        Console.WriteLine("| |  0  1  2  3  4  5  6  7  8  9 |");
 
-    public void CheckDisplayRows()
-    {
-        
+        for (int i = 0; i < _display.GetLength(0); i++)
+        {
+            Console.Write($"| |{_letters[i]}");
+            for (int j = 0; j < _display.GetLength(1); j++)
+            {
+                Console.Write("[");
+                _display[i, j] = "~";
+                Console.Write($"{_display[i, j]}");
+                Console.Write("]");
+            }
+
+            Console.Write("|");
+            Console.WriteLine();
+
+        }
+
+        Console.WriteLine(@" \|\``0``1``2``3``4``5``6``7``8``9`\");
     }
 }

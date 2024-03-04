@@ -9,6 +9,7 @@ class Ship
 
     public Ship()
     {
-        Console.WriteLine("Hello Develop05 World!");
+        _isSunk = false;
+
     }
 }
