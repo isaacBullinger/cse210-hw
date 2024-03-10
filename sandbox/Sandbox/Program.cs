@@ -5,9 +5,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Display display = new Display();
+        Board board = new Board();
 
-        display.PopulateDisplay();
-        display.PopulateBoard();
+        board.PlacePeg(5, 5);
+        
+        board.PopulateDisplay();
+        board.PopulateBoard();
     }
 }

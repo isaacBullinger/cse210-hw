@@ -1,45 +1,35 @@
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 
 public class Peg
 {
     private string _status;
-    private List<int> _position = new List<int>();
+    private int _x;
+    private int _y;
 
     public Peg()
     {
-        _status = " ";
+        _status = "~";
     }
 
     public string GetStatus()
     {
-        string status = _status;
-        return status;
-    }
-
-    public string HitStatus()
-    {
-        _status = "H";
         return _status;
     }
 
-    public string ShipStatus()
+    public void SetStatus(string status)
     {
-        _status = "O";
-        return _status;
+        _status = status;
     }
 
-    public string MissStatus()
-    {
-        _status = "M";
-        return _status;
-    }
-
-    public void SetPostion(string letter, int number)
+    public void SetYPosition()
     {
         int letterCoord = 0;
-        List<int> coordinates = new List<int>();
+
+        Console.Write("Choose a letter (A-J): ");
+        string letter = Console.ReadLine();
 
         if (letter == "A" || letter == "a")
         {
@@ -81,14 +71,25 @@ public class Peg
         {
             letterCoord = 9;
         }
-        number = number - 1;
 
-        _position.Add(letterCoord);
-        _position.Add(number);
+        _x = letterCoord;
     }
 
-    public List<int> GetPosition()
+    public int GetY()
     {
-        return _position;
+        return _y;
+    }
+
+    public void SetXPosition()
+    {
+        Console.Write("Choose a number (0-9): ");
+        int number = int.Parse(Console.ReadLine());
+        
+        _y = number;
+    }
+
+    public int GetX()
+    {
+        return _x;
     }
 }
