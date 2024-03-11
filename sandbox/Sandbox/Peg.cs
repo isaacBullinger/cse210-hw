@@ -24,7 +24,7 @@ public class Peg
         _status = status;
     }
 
-    public void SetYPosition()
+    public int SetXPosition()
     {
         int letterCoord = 0;
 
@@ -72,24 +72,24 @@ public class Peg
             letterCoord = 9;
         }
 
-        _x = letterCoord;
-    }
-
-    public int GetY()
-    {
-        return _y;
-    }
-
-    public void SetXPosition()
-    {
-        Console.Write("Choose a number (0-9): ");
-        int number = int.Parse(Console.ReadLine());
-        
-        _y = number;
+        return letterCoord;
     }
 
     public int GetX()
     {
         return _x;
+    }
+
+    public int SetYPosition()
+    {
+        Console.Write("Choose a number (0-9): ");
+        int number = int.Parse(Console.ReadLine());
+        
+        return number;
+    }
+
+    public int GetY()
+    {
+        return _y;
     }
 }

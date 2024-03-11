@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Dynamic;
 using System.Globalization;
+using System.IO.Compression;
 using System.Reflection.PortableExecutable;
 using System.Security.Cryptography.X509Certificates;
 
@@ -11,9 +12,59 @@ public class Board
     private String[,] _display = new String[10, 10];
     private string _letters = "ABCDEFGHIJ";
     
-    public void PlacePeg(int x, int y)
+    public void PlacePeg()
     {
-        _board[x, y] = "H";
+        Peg peg = new Peg();
+        int x = peg.SetXPosition();
+        int y = peg.SetYPosition();
+        _board[x, y] = "O";
+    }
+
+    public void PlaceShip(int hp, bool isHorizontal)
+    {
+        Ship ship = new Ship(hp, isHorizontal);
+        bool place = false;
+
+        string space = " ";
+        for (int i = 0; i < _board.GetLength(0); i++)
+        {
+            Console.Write(space);
+            space = space + " ";
+            Console.Write(@$" \ \{_letters[i]}");
+            for (int j = 0; j < _board.GetLength(1); j++)
+            {
+                Console.Write(@"\");
+                while (place == true)
+                {
+                    string move = Console.ReadLine();
+
+                    if (move == "w")
+                    {
+
+                    }
+                    if (move == "a")
+                    {
+
+                    }
+                    if (move == "s")
+                    {
+
+                    }
+                    if (move == "d")
+                    
+                    if (move == "P" || move == "p")
+                    {
+                        place = false;
+                    }
+                }
+                Console.Write($"{_board[i, j]}");
+                Console.Write(@"\");
+            }
+            Console.Write(@"\");
+            Console.WriteLine();
+        }
+        Console.WriteLine(@"            \ \_______________________________\");
+        Console.WriteLine(@"             \|___________BATTLESHIP___________|");
     }
 
     public void PopulateBoard()

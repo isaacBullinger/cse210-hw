@@ -1,6 +1,6 @@
 using System;
 
-public class Player
+public abstract class Player
 {
     private string _name;
     private Board _board = new Board();
@@ -12,4 +12,5 @@ public class Player
 
     }
     
+    public abstract int GetLocation();
 }
