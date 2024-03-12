@@ -46,18 +46,48 @@ class Program
                 if (menu == 1)
                 {
                     Simple simple = new Simple();
-                    simple.PrintGoal(simple.SetGoal());
+                    Console.WriteLine("What is the name of your goal? ");
+                    simple.SetName(Console.ReadLine());
+                    Console.WriteLine("What is the description? ");
+                    simple.SetDescription(Console.ReadLine());
+                    Console.WriteLine("What are the points you wish to assign to this goal?");
+                    simple.SetPoints(Console.ReadLine());
                 }
 
-                
+                if (menu == 2)
+                {
+                    Eternal eternal = new Eternal();
+                    Goal goal = new Goal();
+                    Console.WriteLine("What is the name of your goal? ");
+                    goal.SetName(Console.ReadLine());
+                    Console.WriteLine("What is the description? ");
+                    goal.SetDescription(Console.ReadLine());
+                    Console.WriteLine("What are the points you wish to assign to this goal?");
+                    goal.SetPoints(Console.ReadLine());
+
+                }
+
+                if (menu == 3)
+                {
+                    Checklist checklist = new Checklist();
+                }
             }
 
             if (menu == 2)
             {
                 Console.WriteLine("The goals are:");
+                string check = " ";
                 //Goal goal = new Goal();
                 //foreach (goal in goals)
                 //{
+                    // if (goal.IsComplete == true)
+                    //{
+                        //check = X;
+                    //}
+                    // else
+                    //{
+                        //check = " ";
+                    //}
                     //Console.WriteLine($"{number}. [{check}] {name} ({description})")
                 //}
             }

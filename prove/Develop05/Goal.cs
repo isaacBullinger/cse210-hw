@@ -4,8 +4,17 @@ public class Goal
     private string _name;
     private string _description;
     private string _check;
-    private int _points = 0;
+    private string _points;
 
+    public Goal()
+    {
+        Console.WriteLine("What is the name of your goal? ");
+        _name = Console.ReadLine();
+        Console.WriteLine("What is the description? ");
+        _description = Console.ReadLine();
+        Console.WriteLine("What are the points you wish to assign to this goal?");
+        _points = Console.ReadLine();
+    }
     public string GetTypeGoal()
     {
         return _type;
@@ -33,11 +42,11 @@ public class Goal
         _description = description;
     }
 
-    public int GetPoints()
+    public string GetPoints()
     {
         return _points;
     }
-    public void SetPoints(int points)
+    public void SetPoints(string points)
     {
         _points = points;
     }

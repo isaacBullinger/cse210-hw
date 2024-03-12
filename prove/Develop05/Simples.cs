@@ -1,16 +1,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Eternal : Goal
+public class Simple : Goal
 {
     private string _check;
 
-    public Eternal()
+    public Simple()
     {
-        SetTypeGoal("EternalGoal:");
-        _check = "False";
+        SetTypeGoal("SimpleGoal:");
     }
     public override bool IsComplete()
     {
-        return false;
+        return true;
     }
 }
