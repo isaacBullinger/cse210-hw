@@ -3,7 +3,7 @@ public class Goal
     private string _type;
     private string _name;
     private string _description;
-    private string _check;
+    private bool _check;
     private string _points;
 
     public Goal()
@@ -51,9 +51,9 @@ public class Goal
         _points = points;
     }
 
-    public virtual string RecordEvent()
+    public virtual void RecordEvent()
     {
-        return _check;
+
     }
 
     public virtual bool IsComplete()

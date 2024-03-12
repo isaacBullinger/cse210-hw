@@ -7,6 +7,12 @@ public class Simple : Goal
     public Simple()
     {
         SetTypeGoal("SimpleGoal:");
+        _check = "False";
+    }
+
+    public override void RecordEvent()
+    {
+        
     }
     public override bool IsComplete()
     {

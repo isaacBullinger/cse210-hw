@@ -7,7 +7,11 @@ public class Eternal : Goal
     public Eternal()
     {
         SetTypeGoal("EternalGoal:");
-        _check = "False";
+    }
+
+    public override void RecordEvent()
+    {
+        
     }
     public override bool IsComplete()
     {

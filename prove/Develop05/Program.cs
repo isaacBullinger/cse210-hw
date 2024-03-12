@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
@@ -46,50 +47,35 @@ class Program
                 if (menu == 1)
                 {
                     Simple simple = new Simple();
-                    Console.WriteLine("What is the name of your goal? ");
-                    simple.SetName(Console.ReadLine());
-                    Console.WriteLine("What is the description? ");
-                    simple.SetDescription(Console.ReadLine());
-                    Console.WriteLine("What are the points you wish to assign to this goal?");
-                    simple.SetPoints(Console.ReadLine());
+                    goals.Add(simple);
                 }
 
                 if (menu == 2)
                 {
                     Eternal eternal = new Eternal();
-                    Goal goal = new Goal();
-                    Console.WriteLine("What is the name of your goal? ");
-                    goal.SetName(Console.ReadLine());
-                    Console.WriteLine("What is the description? ");
-                    goal.SetDescription(Console.ReadLine());
-                    Console.WriteLine("What are the points you wish to assign to this goal?");
-                    goal.SetPoints(Console.ReadLine());
-
+                    goals.Add(eternal);
                 }
 
                 if (menu == 3)
                 {
                     Checklist checklist = new Checklist();
+                    goals.Add(checklist);
                 }
+                menu = 0;
             }
 
             if (menu == 2)
             {
-                Console.WriteLine("The goals are:");
+                int number = 1;
                 string check = " ";
-                //Goal goal = new Goal();
-                //foreach (goal in goals)
-                //{
-                    // if (goal.IsComplete == true)
-                    //{
-                        //check = X;
-                    //}
-                    // else
-                    //{
-                        //check = " ";
-                    //}
-                    //Console.WriteLine($"{number}. [{check}] {name} ({description})")
-                //}
+
+                Console.WriteLine("The goals are:");
+                foreach (Goal goal in goals)
+                {
+                    Console.WriteLine($"{number}. [{check}] {goal.GetName()} {goal.GetDescription()}");
+
+                    number = number + 1;
+                }
             }
 
             if (menu == 3)
@@ -104,7 +90,10 @@ class Program
 
             if (menu == 5)
             {
-                Console.WriteLine("Record Event!");
+                foreach (Goal goal in goals)
+                {
+
+                }
             }
 
             if (menu == 6)
