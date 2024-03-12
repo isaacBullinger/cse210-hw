@@ -8,7 +8,8 @@ class Program
     static void Main(string[] args)
     {
         int menu;
-        int menu1;
+        int points = 0;
+        List<Goal> goals = new List<Goal>();
         bool quit = false;
 
         string Filename()
@@ -21,7 +22,7 @@ class Program
 
         while(quit == false)
         {
-            Console.WriteLine("You have points.");
+            Console.WriteLine($"You have {points} points.");
 
             Console.WriteLine("Menu Options:");
             Console.WriteLine("  1. Create New Goal");
@@ -40,7 +41,15 @@ class Program
                 Console.WriteLine("  2. Eternal Goal");
                 Console.WriteLine("  3. Checklist Goal");
                 Console.WriteLine("Which type of goal would you like to create? ");
-                menu1 = int.Parse(Console.ReadLine());
+                menu = int.Parse(Console.ReadLine());
+
+                if (menu == 1)
+                {
+                    Simple simple = new Simple();
+                    simple.PrintGoal(simple.SetGoal());
+                }
+
+                
             }
 
             if (menu == 2)
