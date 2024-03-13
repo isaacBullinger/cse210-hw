@@ -72,7 +72,7 @@ class Program
                 Console.WriteLine("The goals are:");
                 foreach (Goal goal in goals)
                 {
-                    if (goal.IsComplete())
+                    if (goal.IsComplete() == true)
                     {
                         check = "X";
                     }
@@ -100,10 +100,33 @@ class Program
 
             if (menu == 5)
             {
+                int number = 1;
+
+                Console.WriteLine("The goals are:");
                 foreach (Goal goal in goals)
                 {
+                    Console.WriteLine($"{number}. {goal.GetName()}");
 
+                    number = number + 1;
                 }
+                
+                Console.Write("Which goal did you accomplish? ");
+                menu = int.Parse(Console.ReadLine());
+                menu = menu - 1;
+
+                foreach (Goal goal in goals)
+                {
+                    int i = 0;
+
+                    if (menu == i)
+                    {
+                        points = points + goal.RecordEvent();
+                        goal.IsComplete();
+                    }
+                    
+                    i = i + 1;
+                }
+                menu = 0;
             }
 
             if (menu == 6)

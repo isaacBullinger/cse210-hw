@@ -11,16 +11,18 @@ public class Checklist : Goal
     {
         SetTypeGoal("ChecklistGoal:");
         Console.WriteLine("How many times does this goal need to be accomplished for a bonus? ");
-        _times = int.Parse(Console.ReadLine());
+        _completed = int.Parse(Console.ReadLine());
         Console.WriteLine("What is the bonus for accomplishing the checklist? ");
         _bonus = int.Parse(Console.ReadLine());
-        _completed = 0;
+        _times = 0;
     }
 
     public override int RecordEvent()
     {
         _times = _times + 1;
         _points = int.Parse(GetPoints());
+        
+        IsComplete();
 
         return _points;
     }
@@ -29,6 +31,7 @@ public class Checklist : Goal
     {
         if (_times == _completed)
         {
+            _points = int.Parse(GetPoints()) + _bonus;
             return true;
         }
 

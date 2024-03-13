@@ -3,7 +3,6 @@ public class Goal
     private string _type;
     private string _name;
     private string _description;
-    private bool _check;
     private string _points;
 
     public Goal()
