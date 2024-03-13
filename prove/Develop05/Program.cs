@@ -67,11 +67,21 @@ class Program
             if (menu == 2)
             {
                 int number = 1;
-                string check = " ";
+                string check;
 
                 Console.WriteLine("The goals are:");
                 foreach (Goal goal in goals)
                 {
+                    if (goal.IsComplete())
+                    {
+                        check = "X";
+                    }
+
+                    else
+                    {
+                        check = " ";
+                    }
+
                     Console.WriteLine($"{number}. [{check}] {goal.GetName()} {goal.GetDescription()}");
 
                     number = number + 1;

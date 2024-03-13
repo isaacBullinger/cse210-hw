@@ -2,16 +2,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Eternal : Goal
 {
-    private string _check;
-
+    private int _points;
     public Eternal()
     {
         SetTypeGoal("EternalGoal:");
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
+        _points = int.Parse(GetPoints());
         
+        return _points;
     }
     public override bool IsComplete()
     {

@@ -15,6 +15,7 @@ public class Goal
         Console.WriteLine("What are the points you wish to assign to this goal?");
         _points = Console.ReadLine();
     }
+
     public string GetTypeGoal()
     {
         return _type;
@@ -51,13 +52,13 @@ public class Goal
         _points = points;
     }
 
-    public virtual void RecordEvent()
+    public virtual int RecordEvent()
     {
-
+        return 0;
     }
 
     public virtual bool IsComplete()
     {
-        return true;
+        return false;
     }
 }
