@@ -33,7 +33,7 @@ public class Simple : Goal
 
     public override string RecordGoal()
     {
-        string output = $"{GetTypeGoal()}:~{GetName()}~{GetDescription()}~{GetPoints()}~{_check}";
+        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}~{_check}";
 
         return output;
     }

@@ -63,6 +63,11 @@ public class Goal
 
     public virtual string RecordGoal() 
     {
-        return "Hello World!";
+        return "goal recorded";
+    }
+
+    public virtual void ReadGoal()
+    {
+        
     }
 }

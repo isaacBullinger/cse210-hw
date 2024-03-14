@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
@@ -90,15 +91,67 @@ class Program
 
             if (menu == 3)
             {
-                foreach (Goal goal in goals)
+
+                string filename = Filename();
+
+                using (StreamWriter outputFile = new StreamWriter(filename))
                 {
-                    Console.WriteLine(goal.RecordGoal());
+                    outputFile.WriteLine(points);
+
+                    foreach (Goal goal in goals)
+                    {
+                        outputFile.WriteLine(goal.RecordGoal());
+                    }
                 }
+                menu = 0;
             }
 
             if (menu == 4)
             {
-                Filename();
+                string filename = Filename();
+                string[] lines = System.IO.File.ReadAllLines(filename);
+
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split("~");
+
+                    if (parts.Length == 1)
+                    {
+                        points = int.Parse(parts[0]);
+                    }
+                    
+                    if (parts[0] == "SimpleGoal:")
+                    {
+                        Simple simple = new Simple();
+                        simple.SetName(parts[1]);
+                        simple.SetDescription(parts[2]);
+                        simple.SetPoints(parts[3]);
+                        goals.Add(simple);
+                    }
+
+                    if (parts[0] == "EternalGoal:")
+                    {
+                        Eternal eternal = new Eternal();
+                        eternal.SetName(parts[1]);
+                        eternal.SetDescription(parts[2]);
+                        eternal.SetPoints(parts[3]);
+                        goals.Add(eternal);
+                    }
+
+                    if (parts[0] == "ChecklistGoal:")
+                    {
+                        Checklist checklist = new Checklist();
+                        checklist.SetName(parts[1]);
+                        checklist.SetDescription(parts[2]);
+                        checklist.SetPoints(parts[3]);
+                        checklist.SetBonus(int.Parse(parts[4]));
+                        checklist.SetTimes(int.Parse(parts[5]));
+                        checklist.SetCompleted(int.Parse(parts[6]));
+                        goals.Add(checklist);
+                    }
+                    menu = 0;
+                }
             }
 
             if (menu == 5)

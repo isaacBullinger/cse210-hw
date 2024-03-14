@@ -1,0 +1,4 @@
+0
+SimpleGoal:~simple~goal~1~False
+EternalGoal:~eternal~goal~2
+ChecklistGoal:~checklist~goal~3~5~0~3

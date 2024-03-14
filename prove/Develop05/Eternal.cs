@@ -21,7 +21,7 @@ public class Eternal : Goal
 
     public override string RecordGoal()
     {
-        string output = $"{GetTypeGoal()}:~{GetName()}~{GetDescription()}~{GetPoints()}";
+        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}";
 
         return output;
     }

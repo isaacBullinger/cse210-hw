@@ -16,6 +16,21 @@ public class Checklist : Goal
         _times = 0;
     }
 
+    public void SetBonus(int bonus)
+    {
+        _bonus = bonus;
+    }
+
+    public void SetTimes(int times)
+    {
+        _times = times;
+    }
+
+    public void SetCompleted(int completed)
+    {
+        _completed = completed;
+    }
+
     public override int RecordEvent()
     {
         _times = _times + 1;
