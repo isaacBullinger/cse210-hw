@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Simple : Goal
 {
     private string _check;
-    private int _points;
 
     public Simple()
     {
@@ -14,9 +13,10 @@ public class Simple : Goal
     public override int RecordEvent()
     {
         _check = "True";
-        _points = int.Parse(GetPoints());
+        int points = int.Parse(GetPoints());
+        Console.WriteLine(int.Parse(GetPoints()));
 
-        return _points;
+        return points;
     }
     public override bool IsComplete()
     {
@@ -29,5 +29,12 @@ public class Simple : Goal
         {
             return false;
         }
+    }
+
+    public override string RecordGoal()
+    {
+        string output = $"{GetTypeGoal()}:~{GetName()}~{GetDescription()}~{GetPoints()}~{_check}";
+
+        return output;
     }
 }

@@ -60,4 +60,9 @@ public class Goal
     {
         return false;
     }
+
+    public virtual string RecordGoal() 
+    {
+        return "Hello World!";
+    }
 }

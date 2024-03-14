@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Eternal : Goal
 {
-    private int _points;
     public Eternal()
     {
         SetTypeGoal("EternalGoal:");
@@ -10,12 +9,20 @@ public class Eternal : Goal
 
     public override int RecordEvent()
     {
-        _points = int.Parse(GetPoints());
+        int points = int.Parse(GetPoints());
+        Console.WriteLine(int.Parse(GetPoints()));
         
-        return _points;
+        return points;
     }
     public override bool IsComplete()
     {
         return false;
+    }
+
+    public override string RecordGoal()
+    {
+        string output = $"{GetTypeGoal()}:~{GetName()}~{GetDescription()}~{GetPoints()}";
+
+        return output;
     }
 }

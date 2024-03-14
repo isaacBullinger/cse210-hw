@@ -5,8 +5,7 @@ public class Checklist : Goal
     private int _bonus;
     private int _times;
     private int _completed;
-    private int _points;
-
+    
     public Checklist()
     {
         SetTypeGoal("ChecklistGoal:");
@@ -20,18 +19,21 @@ public class Checklist : Goal
     public override int RecordEvent()
     {
         _times = _times + 1;
-        _points = int.Parse(GetPoints());
+        int points = int.Parse(GetPoints());
+        Console.WriteLine(int.Parse(GetPoints()));
         
-        IsComplete();
+        if (IsComplete() == true)
+        {
+            points = points + _bonus;
+        }
 
-        return _points;
+        return points;
     }
 
     public override bool IsComplete()
     {
         if (_times == _completed)
         {
-            _points = int.Parse(GetPoints()) + _bonus;
             return true;
         }
 
@@ -39,5 +41,12 @@ public class Checklist : Goal
         {
             return false;
         }
+    }
+
+    public override string RecordGoal()
+    {
+        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}~{_bonus}~{_times}~{_completed}";
+
+        return output;
     }
 }

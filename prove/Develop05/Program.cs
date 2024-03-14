@@ -32,7 +32,7 @@ class Program
             Console.WriteLine("  4. Load Goals");
             Console.WriteLine("  5. Record Event");
             Console.WriteLine("  6. Quit");
-            Console.WriteLine("Select a choice from the menu: ");
+            Console.Write("Select a choice from the menu: ");
             menu = int.Parse(Console.ReadLine());
 
             if (menu == 1)
@@ -90,7 +90,10 @@ class Program
 
             if (menu == 3)
             {
-                Filename();
+                foreach (Goal goal in goals)
+                {
+                    Console.WriteLine(goal.RecordGoal());
+                }
             }
 
             if (menu == 4)
@@ -111,12 +114,13 @@ class Program
                 }
                 
                 Console.Write("Which goal did you accomplish? ");
+                menu = 0;
                 menu = int.Parse(Console.ReadLine());
                 menu = menu - 1;
-
+                int i = 0;
+                
                 foreach (Goal goal in goals)
                 {
-                    int i = 0;
 
                     if (menu == i)
                     {
