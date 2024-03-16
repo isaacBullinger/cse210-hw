@@ -19,7 +19,6 @@ class Program
 
         while(quit == false)
         {
-            Console.Clear();
             Console.WriteLine($"\r\nYou have {points} points.\r\n");
 
             Console.WriteLine("Menu Options:");
