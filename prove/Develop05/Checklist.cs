@@ -24,24 +24,9 @@ public class Checklist : Goal
         _times = times;
     }
 
-    public void SetBonus(int bonus)
-    {
-        _bonus = bonus;
-    }
-
-    public void SetTimes(int times)
-    {
-        _times = times;
-    }
-
     public int GetTimes()
     {
         return _times;
-    }
-
-    public void SetCompleted(int completed)
-    {
-        _completed = completed;
     }
 
     public int GetCompleted()
