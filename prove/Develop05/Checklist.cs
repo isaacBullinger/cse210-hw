@@ -16,6 +16,14 @@ public class Checklist : Goal
         _times = 0;
     }
 
+    public Checklist(string name, string description, string points, int completed, int bonus, int times) : base(name, description, points)
+    {
+        SetTypeGoal("ChecklistGoal:");
+        _completed = completed;
+        _bonus = bonus;
+        _times = times;
+    }
+
     public void SetBonus(int bonus)
     {
         _bonus = bonus;
@@ -26,9 +34,19 @@ public class Checklist : Goal
         _times = times;
     }
 
+    public int GetTimes()
+    {
+        return _times;
+    }
+
     public void SetCompleted(int completed)
     {
         _completed = completed;
+    }
+
+    public int GetCompleted()
+    {
+        return _completed;
     }
 
     public override int RecordEvent()
@@ -58,9 +76,16 @@ public class Checklist : Goal
         }
     }
 
-    public override string RecordGoal()
+    public override List<string> RecordGoal()
     {
-        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}~{_bonus}~{_times}~{_completed}";
+        List<string> output = new List<string>();
+        output.Add(GetTypeGoal());
+        output.Add(GetName());
+        output.Add(GetDescription());
+        output.Add(GetPoints());
+        output.Add(_bonus.ToString());
+        output.Add(_times.ToString());
+        output.Add(_completed.ToString());
 
         return output;
     }

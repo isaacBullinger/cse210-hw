@@ -5,6 +5,13 @@ public class Goal
     private string _description;
     private string _points;
 
+    public Goal(string name, string description, string points)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+    }
+    
     public Goal()
     {
         Console.WriteLine("What is the name of your goal? ");
@@ -61,13 +68,13 @@ public class Goal
         return false;
     }
 
-    public virtual string RecordGoal() 
+    public virtual List<string> RecordGoal() 
     {
-        return "goal recorded";
+        List<string> recorded = new List<string>();
+        return recorded;
     }
 
     public virtual void ReadGoal()
     {
-        
     }
 }

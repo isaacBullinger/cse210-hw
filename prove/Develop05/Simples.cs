@@ -10,6 +10,12 @@ public class Simple : Goal
         _check = "False";
     }
 
+    public Simple(string name, string description, string points, string check) : base(name, description, points)
+    {
+        SetTypeGoal("SimpleGoal:");
+        _check = check;
+    }
+
     public override int RecordEvent()
     {
         _check = "True";
@@ -31,9 +37,15 @@ public class Simple : Goal
         }
     }
 
-    public override string RecordGoal()
+    public override List<string> RecordGoal()
     {
-        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}~{_check}";
+        List<string> output = new List<string>();
+
+        output.Add(GetTypeGoal());
+        output.Add(GetName());
+        output.Add(GetDescription());
+        output.Add(GetPoints());
+        output.Add(_check);
 
         return output;
     }

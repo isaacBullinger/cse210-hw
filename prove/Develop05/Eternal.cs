@@ -7,6 +7,11 @@ public class Eternal : Goal
         SetTypeGoal("EternalGoal:");
     }
 
+    public Eternal(string name, string description, string points) : base(name, description, points)
+    {
+        SetTypeGoal("EternalGoal:");
+    }
+
     public override int RecordEvent()
     {
         int points = int.Parse(GetPoints());
@@ -19,9 +24,13 @@ public class Eternal : Goal
         return false;
     }
 
-    public override string RecordGoal()
+    public override List<string> RecordGoal()
     {
-        string output = $"{GetTypeGoal()}~{GetName()}~{GetDescription()}~{GetPoints()}";
+        List<string> output = new List<string>();
+        output.Add(GetTypeGoal());
+        output.Add(GetName());
+        output.Add(GetDescription());
+        output.Add(GetPoints());
 
         return output;
     }
