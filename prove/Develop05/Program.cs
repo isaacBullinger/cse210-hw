@@ -193,6 +193,8 @@ class Program
                         Console.Clear();
                         Console.WriteLine($"Congratulations! You have earned {tempPoints} points!");
 
+                        // Showed creativity and exceeded requirements: Added an ascii firework show for the user if a checklist goal was completed.
+
                         if (goal.GetTypeGoal() == "ChecklistGoal:")
                         {
                             if (goal.IsComplete() == true)
@@ -250,6 +252,8 @@ class Program
 
             if (menu == 6)
             {
+                // Showed creativity and exceeded requirements: Added a quit confirmation.
+
                 Console.WriteLine("Do you really want to quit? (Y/N)");
                 string confirm = Console.ReadLine();
 
