@@ -35,27 +35,15 @@ public class Goal
     {
         return _name;
     }
-    public void SetName(string name)
-    {
-        _name = name;
-    }
 
     public string GetDescription()
     {
         return _description;
     }
-    public void SetDescription(string description)
-    {
-        _description = description;
-    }
 
     public string GetPoints()
     {
         return _points;
-    }
-    public void SetPoints(string points)
-    {
-        _points = points;
     }
 
     public virtual int RecordEvent()

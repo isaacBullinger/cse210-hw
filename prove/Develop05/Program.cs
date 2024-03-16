@@ -1,9 +1,4 @@
 using System;
-using System.Globalization;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
@@ -24,6 +19,7 @@ class Program
 
         while(quit == false)
         {
+            Console.Clear();
             Console.WriteLine($"\r\nYou have {points} points.\r\n");
 
             Console.WriteLine("Menu Options:");
@@ -34,6 +30,7 @@ class Program
             Console.WriteLine("  5. Record Event");
             Console.WriteLine("  6. Quit");
             Console.Write("Select a choice from the menu: ");
+
             menu = int.Parse(Console.ReadLine());
 
             if (menu == 1)
@@ -43,6 +40,7 @@ class Program
                 Console.WriteLine("  2. Eternal Goal");
                 Console.WriteLine("  3. Checklist Goal");
                 Console.WriteLine("Which type of goal would you like to create? ");
+
                 menu = int.Parse(Console.ReadLine());
 
                 if (menu == 1)
@@ -96,6 +94,7 @@ class Program
                     }
 
                     number = number + 1;
+
                 }
             }
 
@@ -117,10 +116,14 @@ class Program
                             outputFile.Write(word);
                             outputFile.Write("~");
                         }
+
                         outputFile.WriteLine();
+
                     }
                 }
+
                 menu = 0;
+
             }
 
             if (menu == 4)
@@ -154,7 +157,9 @@ class Program
                         Checklist checklist = new Checklist(parts[1], parts[2], parts[3], int.Parse(parts[6]), int.Parse(parts[4]), int.Parse(parts[5]));
                         goals.Add(checklist);
                     }
+
                     menu = 0;
+
                 }
             }
 
@@ -171,7 +176,7 @@ class Program
                 }
                 
                 Console.Write("Which goal did you accomplish? ");
-                menu = 0;
+                
                 menu = int.Parse(Console.ReadLine());
                 menu = menu - 1;
                 int i = 0;
@@ -179,46 +184,53 @@ class Program
                 
                 foreach (Goal goal in goals)
                 {
-
                     if (menu == i)
                     {
                         tempPoints = goal.RecordEvent();
                         points = points + tempPoints;
                         goal.IsComplete();
+
                         Console.Clear();
                         Console.WriteLine($"Congratulations! You have earned {tempPoints} points!");
+
                         if (goal.GetTypeGoal() == "ChecklistGoal:")
                         {
                             if (goal.IsComplete() == true)
                             {
                                 Console.WriteLine("Here is a firework show: ");
                                 Thread.Sleep(3000);
+
                                 Console.Clear();
                                 Console.WriteLine(@"     ");
                                 Console.WriteLine(@"     ");
                                 Console.WriteLine(@"  ^  ");
                                 Thread.Sleep(500);
                                 Console.Clear();
+
                                 Console.WriteLine(@"     ");
                                 Console.WriteLine(@"  ^  ");
                                 Console.WriteLine(@"     ");
                                 Thread.Sleep(500);
                                 Console.Clear();
+
                                 Console.WriteLine(@"     ");
                                 Console.WriteLine(@"  *  ");
                                 Console.WriteLine(@"     ");
                                 Thread.Sleep(500);
                                 Console.Clear();
+
                                 Console.WriteLine(@"\ | /");
                                 Console.WriteLine(@"--*--");
                                 Console.WriteLine(@"/ | \");
                                 Thread.Sleep(500);
                                 Console.Clear();
+
                                 Console.WriteLine(@"` ' `");
                                 Console.WriteLine(@":- _;");
                                 Console.WriteLine(@".` ',");
                                 Thread.Sleep(500);
                                 Console.Clear();
+
                                 Console.WriteLine(@"` ' `");
                                 Console.WriteLine(@"     ");
                                 Console.WriteLine(@".   ,");
@@ -229,8 +241,11 @@ class Program
                     }
                     
                     i = i + 1;
+
                 }
+
                 menu = 0;
+                
             }
 
             if (menu == 6)
