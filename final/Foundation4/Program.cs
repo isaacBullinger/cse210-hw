@@ -5,15 +5,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool t = true;
+        bool isHorizontal = true;
         ConsoleKey input = ConsoleKey.Insert;
         int moveX = 0;
         int moveY = 0;
         String[,] os = new String[10,10];
 
+        Console.WriteLine("How many slots does the ship take? ");
+        int hp = int.Parse(Console.ReadLine());
+        hp = hp - 1;
+
         while (!Console.KeyAvailable && input != ConsoleKey.Enter)
         {
             Console.Clear();
+
             if (input == ConsoleKey.W)
             {
                 moveX = moveX - 1;
@@ -32,31 +37,65 @@ class Program
                 }
             }
 
+            if (input == ConsoleKey.H)
+            {
+                isHorizontal = true;
+            }
+
+            if (input == ConsoleKey.V)
+            {
+                isHorizontal = false;
+            }
+
             if (input == ConsoleKey.S)
             {
                 moveX = moveX + 1;
 
-                while (moveX >= 10)
+                if (isHorizontal == false)
                 {
-                    moveX = 9;
+                    if (moveX >= 10 - hp)
+                    {
+                        moveX = 9 - hp;
+                    }
+                }
+
+                else
+                {
+                    if (moveX >= 10)
+                    {
+                        moveX = 9;
+                    }
                 }
             }
 
             if (input == ConsoleKey.D)
             {
-                moveY = moveY + 1;
-
-                while (moveY >= 10)
+                if (isHorizontal == true)
                 {
-                    moveY = 9;
+                    moveY = moveY + 1;
+
+                    if (moveY >= 10 - hp)
+                    {
+                        moveY = 9 - hp;
+                    }
+                }
+
+                else
+                {
+                    moveY = moveY + 1;
+
+                    if(moveY >= 10)
+                    {
+                        moveY = 9;
+                    }
                 }
             }
+
 
             for (int i = 0; i < 10 && i >= 0; i++)
             {
                 for (int j = 0; j < 10 && j >= 0; j++)
                 {
-
                     if (i == moveX)
                     {
                         if (j == moveY)
