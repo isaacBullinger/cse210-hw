@@ -7,45 +7,77 @@ class Program
     {
         bool t = true;
         ConsoleKey input = ConsoleKey.Insert;
-        int move = 0;
-        String[] os = new String[10];
+        int moveX = 0;
+        int moveY = 0;
+        String[,] os = new String[10,10];
 
         while (!Console.KeyAvailable && input != ConsoleKey.Enter)
         {
             Console.Clear();
-            if (input == ConsoleKey.D)
+            if (input == ConsoleKey.W)
             {
-                move = move + 1;
-
-                while (move >= 10)
+                moveX = moveX - 1;
+                if (moveX <= 0)
                 {
-                    move = 9;
+                    moveX = 0;
                 }
             }
 
             if (input == ConsoleKey.A)
             {
-                move = move - 1;
-                if (move <= 0)
+                moveY = moveY - 1;
+                if (moveY <= 0)
                 {
-                    move = 0;
+                    moveY = 0;
+                }
+            }
+
+            if (input == ConsoleKey.S)
+            {
+                moveX = moveX + 1;
+
+                while (moveX >= 10)
+                {
+                    moveX = 9;
+                }
+            }
+
+            if (input == ConsoleKey.D)
+            {
+                moveY = moveY + 1;
+
+                while (moveY >= 10)
+                {
+                    moveY = 9;
                 }
             }
 
             for (int i = 0; i < 10 && i >= 0; i++)
             {
+                for (int j = 0; j < 10 && j >= 0; j++)
+                {
 
-                if (i == move)
-                {
-                    os[move] = "O";
-                }
+                    if (i == moveX)
+                    {
+                        if (j == moveY)
+                        {
+                            os[moveX, moveY] = "O";
+                        }
+
+                        else
+                        {
+                            os[i, j] = "~";
+                        }
+                    }
+
+                    else
+                    {
+                        os[i, j] = "~";
+                    }
                 
-                else
-                {
-                    os[i] = "~";
+                    Console.Write(os[i, j]);
                 }
-                
-                Console.Write(os[i]);
+                Console.WriteLine();
             }
             input = Console.ReadKey(true).Key;
             Console.WriteLine();
