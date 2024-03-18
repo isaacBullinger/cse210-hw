@@ -6,43 +6,49 @@ class Program
     static void Main(string[] args)
     {
         bool t = true;
-        string input = "";
+        ConsoleKey input = ConsoleKey.Insert;
         int move = 0;
         String[] os = new String[10];
-        for (int i = 0; i < 10; i++)
+
+        while (!Console.KeyAvailable && input != ConsoleKey.Enter)
         {
-            os[i] = "~";
-        }
-        while (t == true)
-        {
+            Console.Clear();
+            if (input == ConsoleKey.D)
+            {
+                move = move + 1;
+
+                while (move >= 10)
+                {
+                    move = 9;
+                }
+            }
+
+            if (input == ConsoleKey.A)
+            {
+                move = move - 1;
+                if (move <= 0)
+                {
+                    move = 0;
+                }
+            }
 
             for (int i = 0; i < 10 && i >= 0; i++)
             {
-                if (input == "d")
-                {
-                    move = move + 1;
-                }
-
-                if (input == "a")
-                {
-                    move = move - 1;
-                }
 
                 if (i == move)
                 {
-                    os[move] = "_";
-                    Console.Write(os[move]);
-                    Thread.Sleep(500);
-                    Console.Write("\b \b");
-                    Thread.Sleep(500);
+                    os[move] = "O";
                 }
-
+                
                 else
                 {
-                    Console.Write("~");
-                    Console.Write("\b \b");
+                    os[i] = "~";
                 }
+                
+                Console.Write(os[i]);
             }
+            input = Console.ReadKey(true).Key;
+            Console.WriteLine();
         }
     }
 }
