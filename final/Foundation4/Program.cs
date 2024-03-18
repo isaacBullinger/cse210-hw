@@ -40,11 +40,21 @@ class Program
             if (input == ConsoleKey.H)
             {
                 isHorizontal = true;
+
+                if (moveY >= 10 - hp)
+                {
+                    moveY = 9 - hp;
+                }
             }
 
             if (input == ConsoleKey.V)
             {
                 isHorizontal = false;
+                
+                if (moveX >= 10 - hp)
+                {
+                    moveX = 9 - hp;
+                }
             }
 
             if (input == ConsoleKey.S)
@@ -53,7 +63,7 @@ class Program
 
                 if (isHorizontal == false)
                 {
-                    if (moveX >= 10 - hp)
+                    while (moveX >= 10 - hp)
                     {
                         moveX = 9 - hp;
                     }
@@ -61,7 +71,7 @@ class Program
 
                 else
                 {
-                    if (moveX >= 10)
+                    while (moveX >= 10)
                     {
                         moveX = 9;
                     }
@@ -74,7 +84,7 @@ class Program
                 {
                     moveY = moveY + 1;
 
-                    if (moveY >= 10 - hp)
+                    while (moveY >= 10 - hp)
                     {
                         moveY = 9 - hp;
                     }
@@ -84,7 +94,7 @@ class Program
                 {
                     moveY = moveY + 1;
 
-                    if(moveY >= 10)
+                    while (moveY >= 10)
                     {
                         moveY = 9;
                     }
