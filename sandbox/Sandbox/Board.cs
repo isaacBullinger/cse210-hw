@@ -20,55 +20,10 @@ public class Board
         _board[x, y] = "O";
     }
 
-    public void PlaceShip(int hp, bool isHorizontal)
-    {
-        Ship ship = new Ship(hp, isHorizontal);
-        bool place = false;
-
-        string space = " ";
-        for (int i = 0; i < _board.GetLength(0); i++)
-        {
-            Console.Write(space);
-            space = space + " ";
-            Console.Write(@$" \ \{_letters[i]}");
-            for (int j = 0; j < _board.GetLength(1); j++)
-            {
-                Console.Write(@"\");
-                while (place == true)
-                {
-                    string move = Console.ReadLine();
-
-                    if (move == "w")
-                    {
-
-                    }
-                    if (move == "a")
-                    {
-
-                    }
-                    if (move == "s")
-                    {
-
-                    }
-                    if (move == "d")
-                    
-                    if (move == "P" || move == "p")
-                    {
-                        place = false;
-                    }
-                }
-                Console.Write($"{_board[i, j]}");
-                Console.Write(@"\");
-            }
-            Console.Write(@"\");
-            Console.WriteLine();
-        }
-        Console.WriteLine(@"            \ \_______________________________\");
-        Console.WriteLine(@"             \|___________BATTLESHIP___________|");
-    }
-
     public void PopulateBoard()
     {
+        //Fleet fleet = new Fleet();
+        //_board = fleet.PlaceShips();
         string space = " ";
         for (int i = 0; i < _board.GetLength(0); i++)
         {

@@ -1,135 +1,163 @@
 using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using Microsoft.VisualBasic;
 
 class Program
 {
     static void Main(string[] args)
     {
+        int aircraftCarrier = 5;
+        int battleship = 4;
+        int submarine = 3;
+        int destroyer = 3;
+        int cruiser = 2;
+
         bool isHorizontal = true;
         ConsoleKey input = ConsoleKey.Insert;
-        int moveX = 0;
-        int moveY = 0;
+        int hitPoints = 0;
         String[,] os = new String[10,10];
+        int menu = 0;
+        List<int> ships = new List<int>();
 
-        Console.WriteLine("How many slots does the ship take? ");
-        int hp = int.Parse(Console.ReadLine());
-        hp = hp - 1;
+        ships.Add(cruiser);
+        ships.Add(destroyer);
+        ships.Add(submarine);
+        ships.Add(battleship);
+        ships.Add(aircraftCarrier);
 
-        while (!Console.KeyAvailable && input != ConsoleKey.Enter)
+        while (ships.Count() > 0)
         {
-            Console.Clear();
+            input = ConsoleKey.Insert;
+            int moveX = 0;
+            int moveY = 0;
 
-            if (input == ConsoleKey.W)
+            Console.WriteLine("Welcome to Battleship! To begin, select a ship to place:\r\n");
+            Console.WriteLine("1. Cruiser           (2 slots)   Orientation:");
+            Console.WriteLine("2. Destroyer         (3 slots)   Horizontal (H)");
+            Console.WriteLine("3. Submarine         (3 slots)   Vertical   (V)");
+            Console.WriteLine("4. Battleship        (4 slots)");
+            Console.WriteLine("5. Aircraft Carrier  (5 slots)");
+
+            Console.WriteLine("Select a ship to place: ");
+            menu = int.Parse(Console.ReadLine());
+            menu--;
+            
+            hitPoints = ships[menu];
+            for (int i = 0; i <= ships.Count(); i++)
             {
-                moveX = moveX - 1;
-                if (moveX <= 0)
+                if (i == menu)
                 {
-                    moveX = 0;
+                    ships.Remove(menu);
                 }
             }
 
-            if (input == ConsoleKey.A)
+            hitPoints--;
+
+            while (!Console.KeyAvailable && input != ConsoleKey.Enter)
             {
-                moveY = moveY - 1;
-                if (moveY <= 0)
+                Console.Clear();
+
+                if (input == ConsoleKey.W && moveX > 0)
                 {
-                    moveY = 0;
+                    moveX--;
                 }
-            }
 
-            if (input == ConsoleKey.H)
-            {
-                isHorizontal = true;
-
-                if (moveY >= 10 - hp)
+                if (input == ConsoleKey.A && moveY > 0)
                 {
-                    moveY = 9 - hp;
+                    moveY--;
                 }
-            }
 
-            if (input == ConsoleKey.V)
-            {
-                isHorizontal = false;
-                
-                if (moveX >= 10 - hp)
+                if (input == ConsoleKey.S)
                 {
-                    moveX = 9 - hp;
-                }
-            }
-
-            if (input == ConsoleKey.S)
-            {
-                moveX = moveX + 1;
-
-                if (isHorizontal == false)
-                {
-                    while (moveX >= 10 - hp)
+                    if (isHorizontal == true && moveX < 9)
                     {
-                        moveX = 9 - hp;
+                        moveX++;
+                    }
+
+                    else if (isHorizontal == false && moveX < 9 - hitPoints)
+                    {
+                        moveX++;
                     }
                 }
 
-                else
+                if (input == ConsoleKey.D)
                 {
-                    while (moveX >= 10)
+                    if (isHorizontal == true && moveY < 9 - hitPoints)
                     {
-                        moveX = 9;
+                        moveY++;
                     }
-                }
-            }
 
-            if (input == ConsoleKey.D)
-            {
-                if (isHorizontal == true)
-                {
-                    moveY = moveY + 1;
-
-                    while (moveY >= 10 - hp)
+                    else if (isHorizontal == false && moveY < 9)
                     {
-                        moveY = 9 - hp;
+                        moveY++;
                     }
                 }
 
-                else
+                if (input == ConsoleKey.R)
                 {
-                    moveY = moveY + 1;
-
-                    while (moveY >= 10)
+                    if (isHorizontal == true && moveX <= 9 - hitPoints)
                     {
-                        moveY = 9;
+                        isHorizontal = false;
+                    }
+
+                    else if (isHorizontal == false && moveY <= 9 - hitPoints)
+                    {
+                        isHorizontal = true;
                     }
                 }
-            }
 
-
-            for (int i = 0; i < 10 && i >= 0; i++)
-            {
-                for (int j = 0; j < 10 && j >= 0; j++)
+                for (int i = 0; i < 10; i++)
                 {
-                    if (i == moveX)
+                    for (int j = 0; j < 10; j++)
                     {
-                        if (j == moveY)
-                        {
-                            os[moveX, moveY] = "O";
-                        }
-
-                        else
+                        if (os[i, j] != "O")
                         {
                             os[i, j] = "~";
                         }
                     }
-
-                    else
-                    {
-                        os[i, j] = "~";
-                    }
-                
-                    Console.Write(os[i, j]);
                 }
+
+                if (isHorizontal == true)
+                {
+                    for (int i = moveY; i <= moveY + hitPoints; i++)
+                    {
+                        os[moveX, i] = "*";
+                    }
+                }
+
+                else
+                {
+                    for (int i = moveX; i <= moveX + hitPoints; i++)
+                    {
+                        os[i, moveY] = "*";
+                    }
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write(os[i, j]);
+                    }
+                    Console.WriteLine();
+                }
+
+                input = Console.ReadKey(true).Key;
                 Console.WriteLine();
             }
-            input = Console.ReadKey(true).Key;
-            Console.WriteLine();
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (os[i, j] == "*")
+                    {
+                        os[i, j] = "O";
+                    }
+                }
+            }
         }
     }
 }

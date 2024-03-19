@@ -17,8 +17,6 @@ class Program
             Console.WriteLine("4. Battleship        (4 slots)");
             Console.WriteLine("5. Aircraft Carrier  (5 slots)");
 
-            board.PlaceShip(5, true);
-
             board.PlacePeg();
         
             board.PopulateDisplay();

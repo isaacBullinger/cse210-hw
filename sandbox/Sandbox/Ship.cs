@@ -5,25 +5,17 @@ class Ship
 {
     bool _isSunk;
     int _hitPoints;
-    bool _isHorizontal;
+    int _xCoord;
+    int _yCoord;
 
-    public Ship(int hitPoints, bool isHorizontal)
+    public Ship(int hitPoints)
     {
         _isSunk = false;
         _hitPoints = hitPoints;
-        _isHorizontal = isHorizontal;
     }
 
     public int GetHP()
     {
         return _hitPoints;
-    }
-
-    public void ShipCursor()
-    {
-        Console.Write("O");
-        Thread.Sleep(300);
-        Console.Write("\b \b");
-        Thread.Sleep(300);
     }
 }
