@@ -19,7 +19,9 @@ class Program
         int hitPoints = 0;
         String[,] os = new String[10,10];
         int menu = 0;
+        List<int> selection = new List<int>();
         List<int> ships = new List<int>();
+        int count = 0;
 
         ships.Add(cruiser);
         ships.Add(destroyer);
@@ -27,7 +29,7 @@ class Program
         ships.Add(battleship);
         ships.Add(aircraftCarrier);
 
-        while (ships.Count() > 0)
+        while (count < 5)
         {
             input = ConsoleKey.Insert;
             int moveX = 0;
@@ -35,24 +37,16 @@ class Program
 
             Console.WriteLine("Welcome to Battleship! To begin, select a ship to place:\r\n");
             Console.WriteLine("1. Cruiser           (2 slots)   Orientation:");
-            Console.WriteLine("2. Destroyer         (3 slots)   Horizontal (H)");
-            Console.WriteLine("3. Submarine         (3 slots)   Vertical   (V)");
-            Console.WriteLine("4. Battleship        (4 slots)");
-            Console.WriteLine("5. Aircraft Carrier  (5 slots)");
+            Console.WriteLine("2. Destroyer         (3 slots)   Rotate   (R)");
+            Console.WriteLine("3. Submarine         (3 slots)   Movement:   ");
+            Console.WriteLine("4. Battleship        (4 slots)         W     ");
+            Console.WriteLine("5. Aircraft Carrier  (5 slots)       A S D   ");
 
             Console.WriteLine("Select a ship to place: ");
             menu = int.Parse(Console.ReadLine());
             menu--;
             
             hitPoints = ships[menu];
-            for (int i = 0; i <= ships.Count(); i++)
-            {
-                if (i == menu)
-                {
-                    ships.Remove(menu);
-                }
-            }
-
             hitPoints--;
 
             while (!Console.KeyAvailable && input != ConsoleKey.Enter)
@@ -112,9 +106,14 @@ class Program
                 {
                     for (int j = 0; j < 10; j++)
                     {
-                        if (os[i, j] != "O")
+                        if (os[i, j] != "O" && os[i, j] != "X")
                         {
                             os[i, j] = "~";
+                        }
+
+                        if (os[i, j] == "X")
+                        {
+                            os[i, j] = "O";
                         }
                     }
                 }
@@ -123,7 +122,15 @@ class Program
                 {
                     for (int i = moveY; i <= moveY + hitPoints; i++)
                     {
-                        os[moveX, i] = "*";
+                        if (os[moveX, i] == "O")
+                        {
+                            os[moveX, i] = "X";
+                        }
+
+                        else if (os[moveX, i] != "X")
+                        {
+                            os[moveX, i] = "*";
+                        }
                     }
                 }
 
@@ -131,7 +138,15 @@ class Program
                 {
                     for (int i = moveX; i <= moveX + hitPoints; i++)
                     {
-                        os[i, moveY] = "*";
+                        if (os[i, moveY] == "O")
+                        {
+                            os[i, moveY] = "X";
+                        }
+
+                        else if (os[i, moveY] != "X")
+                        {
+                            os[i, moveY] = "*";
+                        }
                     }
                 }
 
@@ -158,6 +173,7 @@ class Program
                     }
                 }
             }
+            count++;
         }
     }
 }

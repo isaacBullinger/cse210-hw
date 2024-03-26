@@ -12,18 +12,10 @@ public class Board
     private String[,] _display = new String[10, 10];
     private string _letters = "ABCDEFGHIJ";
     
-    public void PlacePeg()
-    {
-        Peg peg = new Peg();
-        int x = peg.SetXPosition();
-        int y = peg.SetYPosition();
-        _board[x, y] = "O";
-    }
 
-    public void PopulateBoard()
+    public void PopulateBoard(String[,] ships)
     {
-        //Fleet fleet = new Fleet();
-        //_board = fleet.PlaceShips();
+        _board = ships;
         string space = " ";
         for (int i = 0; i < _board.GetLength(0); i++)
         {
@@ -35,6 +27,7 @@ public class Board
                 Console.Write(@"\");
                 if (_board[i, j] != "H" && _board[i, j] != "O" && _board[i, j] != "M")
                 {
+                    // check if is null
                     _board[i, j] = "~";
                 }
                 Console.Write($"{_board[i, j]}");
