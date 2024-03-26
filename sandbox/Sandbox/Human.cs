@@ -22,6 +22,7 @@ public class Human: Player
         while (count < 5)
         {
             ConsoleKey input = ConsoleKey.Insert;
+            bool isOverlap = false;
             int moveX = 0;
             int moveY = 0;
             int menu;
@@ -133,6 +134,7 @@ public class Human: Player
                         if (positions[moveX, i] == "O")
                         {
                             positions[moveX, i] = "X";
+                            isOverlap = true;
                         }
 
                         else
@@ -149,6 +151,7 @@ public class Human: Player
                         if (positions[i, moveY] == "O")
                         {
                             positions[i, moveY] = "X";
+                            isOverlap = true;
                         }
 
                         else if (positions[i, moveY] != "X")
@@ -174,17 +177,27 @@ public class Human: Player
                 Console.WriteLine();
             }
 
-            for (int i = 0; i < 10; i++)
+            if (isOverlap == false)
             {
-                for (int j = 0; j < 10; j++)
+                for (int i = 0; i < 10; i++)
                 {
-                    if (positions[i, j] == "*")
+                    for (int j = 0; j < 10; j++)
                     {
-                        positions[i, j] = "O";
-                        count++;
-                        ships.RemoveAt(menu);
+                        if (positions[i, j] == "*")
+                        {
+                            positions[i, j] = "O";
+                        }
                     }
                 }
+
+                count++;
+                ships.RemoveAt(menu);
+            }
+
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Ships overlap, try again...\r\n");
             }
         }
         return positions;

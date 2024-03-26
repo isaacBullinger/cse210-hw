@@ -8,9 +8,10 @@ public class Program
         Board board = new Board();
         bool run = true;
 
-        Computer computer = new Computer();
+        //Computer computer = new Computer();
+        Human human = new Human();
 
         board.PopulateDisplay();
-        board.PopulateBoard(computer.GetPostions());
+        board.PopulateBoard(human.GetPostions());
     }
 }

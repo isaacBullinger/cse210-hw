@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 public class Computer: Player
 {
@@ -17,6 +18,7 @@ public class Computer: Player
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = fleet.GetFleet();
+        bool display = false;
         bool isHorizontal;
         String[,] positions = new String[10,10];
 
@@ -28,7 +30,6 @@ public class Computer: Player
 
             Random random = new Random();
             int randomOrientation = random.Next(0,2);
-            Console.WriteLine(randomOrientation);
 
             if (randomOrientation == 1)
             {
@@ -44,9 +45,12 @@ public class Computer: Player
                 _moveY = random.Next(9 - hitPoints);
             }
 
-            //Console.Clear();
+            Console.Clear();
 
-            Console.WriteLine("  0  1  2  3  4  5  6  7  8  9");
+            if (display == true)
+            {
+                Console.WriteLine("  0  1  2  3  4  5  6  7  8  9");
+            }
 
             for (int i = 0; i < 10; i++)
             {
@@ -98,38 +102,44 @@ public class Computer: Player
                 }
             }
 
-            for (int i = 0; i < 10; i++)
+            if (display == true)
             {
-                Console.Write($"{letters[i]}");
-                for (int j = 0; j < 10; j++)
+                for (int i = 0; i < 10; i++)
                 {
-                    Console.Write("[");
-                    Console.Write(positions[i, j]);
-                    Console.Write("]");
+                    Console.Write($"{letters[i]}");
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write("[");
+                        Console.Write(positions[i, j]);
+                        Console.Write("]");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
             }
 
             Console.WriteLine();
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (positions[i, j] == "*")
-                    {
-                        positions[i, j] = "O";
-                    }
-                }
-            }
-            
             if (isOverlap == false)
             {
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (positions[i, j] == "*")
+                        {
+                            positions[i, j] = "O";
+                        }
+                    }
+                }
+                
                 count++;
                 ships.RemoveAt(0);
             }
 
-            Thread.Sleep(3000);
+            if (display == true)
+            {
+                Thread.Sleep(1000);
+            }
         }
         return positions;
     }
