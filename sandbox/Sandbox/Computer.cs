@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class Computer: Player
 {
-    
     private int _moveX;
     private int _moveY;
     public Computer()
@@ -18,12 +17,14 @@ public class Computer: Player
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = fleet.GetFleet();
+        Status[,] statuses = new Status[10, 10];
         bool display = false;
         bool isHorizontal;
         String[,] positions = new String[10,10];
 
         while (count < 5)
         {
+
             bool isOverlap = false;
             int hitPoints = ships[0].GetHP();
             hitPoints--;
@@ -59,6 +60,7 @@ public class Computer: Player
                     if (positions[i, j] != "O" && positions[i, j] != "X")
                     {
                         positions[i, j] = "~";
+                        statuses[i, j] = Status.Empty;
                     }
 
                     if (positions[i, j] == "X")
@@ -128,6 +130,7 @@ public class Computer: Player
                         if (positions[i, j] == "*")
                         {
                             positions[i, j] = "O";
+                            statuses[i, j] = ships[0].GetStatus();
                         }
                     }
                 }
@@ -141,30 +144,37 @@ public class Computer: Player
                 Thread.Sleep(1000);
             }
         }
+        SetStatuses(statuses);
         return positions;
     }
 
-    public override void RequestLocation()
+    public override void RequestLocation(String[,] positions)
     {
         bool same = true;
+
         while (same == true)
         {
-            Peg peg = new Peg();
-            if (peg.GetStatus() == "O")
+            Random random = new Random();
+            int xCoord = random.Next();
+            int yCoord = random.Next();
+
+            Peg peg = new Peg(xCoord, yCoord);
+
+            if (peg.GetStatus() == Status.Aircraft_Carrier || peg.GetStatus() == Status.Battleship || peg.GetStatus() == Status.Cruiser || peg.GetStatus() == Status.Destroyer || peg.GetStatus() == Status.Submarine)
             {
-                peg.SetStatus("H");
+                peg.SetStatus(Status.Hit);
                 same = false;
-                //_pegs.Add(peg);
+                //AddPeg(peg);
             }
 
-            else if (peg.GetStatus() == "~")
+            else if (peg.GetStatus() == Status.Empty)
             {
-                peg.SetStatus("M");
+                peg.SetStatus(Status.Miss);
                 same = false;
-                //_pegs.Add(peg);
+                //AddPeg(peg);
             }
 
-            else if (peg.GetStatus() == "H" || peg.GetStatus() == "M" || peg.GetStatus() == "S")
+            else if (peg.GetStatus() == Status.Hit || peg.GetStatus() == Status.Miss || peg.GetStatus() == Status.Sink)
             {
                 same = true;
                 Console.WriteLine("Location already chosen, please try again.");

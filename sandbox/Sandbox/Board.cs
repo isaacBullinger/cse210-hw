@@ -12,6 +12,17 @@ public class Board
     private String[,] _display = new String[10, 10];
     private string _letters = "ABCDEFGHIJ";
     
+    public void DisplayStatus(Status[,] statuses)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                Console.Write(statuses[i, j]);
+            }
+            Console.WriteLine();
+        }
+    }
 
     public void PopulateBoard(String[,] ships)
     {

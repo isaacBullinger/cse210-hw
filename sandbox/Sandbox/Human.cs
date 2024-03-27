@@ -1,6 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
+
 public class Human: Player
 {
-    private List<Peg> _pegs = new List<Peg>();
+
     public Human()
     {
         Console.WriteLine("What is your name? ");
@@ -15,6 +18,7 @@ public class Human: Player
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = new List<Ship>();
+        Status[,] statuses = new Status[10, 10];
         ships = fleet.GetFleet();
         bool isHorizontal = true;
         String[,] positions = new String[10,10];
@@ -54,6 +58,7 @@ public class Human: Player
             menu--;
 
             int hitPoints = ships[menu].GetHP();
+            Status status = ships[menu].GetStatus();
             hitPoints--;
 
             while (!Console.KeyAvailable && input != ConsoleKey.Enter)
@@ -118,6 +123,7 @@ public class Human: Player
                         if (positions[i, j] != "O" && positions[i, j] != "X")
                         {
                             positions[i, j] = "~";
+                            statuses[i, j] = Status.Empty;
                         }
 
                         if (positions[i, j] == "X")
@@ -186,6 +192,7 @@ public class Human: Player
                         if (positions[i, j] == "*")
                         {
                             positions[i, j] = "O";
+                            statuses[i, j] = ships[menu].GetStatus();
                         }
                     }
                 }
@@ -200,30 +207,83 @@ public class Human: Player
                 Console.WriteLine("Ships overlap, try again...\r\n");
             }
         }
+        SetStatuses(statuses);
         return positions;
     }
 
-    public override void RequestLocation()
+    public override void RequestLocation(String[,] positions)
     {
         bool same = true;
+
         while (same == true)
         {
-            Peg peg = new Peg();
-            if (peg.GetStatus() == "O")
+            int xCoord = 0;
+
+            Console.Write("Choose a letter (A-J): ");
+            string letter = Console.ReadLine();
+
+            if (letter == "A" || letter == "a")
             {
-                peg.SetStatus("H");
-                same = false;
-                _pegs.Add(peg);
+                xCoord = 0;
+            }
+            else if (letter == "B" || letter == "b")
+            {
+                xCoord = 1;
+            }
+            else if (letter == "C" || letter == "c")
+            {
+                xCoord = 2;
+            }
+            else if (letter == "D" || letter == "d")
+            {
+                xCoord = 3;
+            }
+            else if (letter == "E" || letter == "e")
+            {
+                xCoord = 4;
+            }
+            else if (letter == "F" || letter == "f")
+            {
+                xCoord = 5;
+            }
+            else if (letter == "G" || letter == "g")
+            {
+                xCoord = 6;
+            }
+            else if (letter == "H" || letter == "h")
+            {
+                xCoord = 7;
+            }
+            else if (letter == "I" || letter == "i")
+            {
+                xCoord = 8;
+            }
+            else if (letter == "J" || letter == "j")
+            {
+                xCoord = 9;
             }
 
-            else if (peg.GetStatus() == "~")
+            Console.Write("Choose a number (0-9): ");
+            int yCoord = int.Parse(Console.ReadLine());
+
+            Peg peg = new Peg(xCoord, yCoord);
+            if (positions[xCoord, yCoord] == "O")
             {
-                peg.SetStatus("M");
+                peg.SetStatus(Status.Hit);
+                positions[xCoord, yCoord] = "H";
                 same = false;
-                _pegs.Add(peg);
+                //_pegs.Add(peg);
             }
 
-            else if (peg.GetStatus() == "H" || peg.GetStatus() == "M" || peg.GetStatus() == "S")
+            else if (positions[xCoord, yCoord] == "~")
+            {
+                peg.SetStatus(Status.Miss);
+                positions[xCoord, yCoord] = "M";
+                same = false;
+                //_pegs.Add(peg);
+            }
+
+            else if (peg.GetStatus() == Status.Hit || peg.GetStatus() == Status.Miss || peg.GetStatus() == Status.Sink)
             {
                 same = true;
                 Console.WriteLine("Location already chosen, please try again.");
