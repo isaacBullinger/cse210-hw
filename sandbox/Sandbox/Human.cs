@@ -48,18 +48,14 @@ public class Human: Player
 
             index = 1;
 
-            Console.WriteLine("\r\n Rotate (R)");
-            Console.WriteLine(" Movement:");
-            Console.WriteLine("     W");
-            Console.WriteLine("   A S D");
-            Console.WriteLine("Please select a ship to place, press <Enter> to place: ");
+            Console.Write("\r\nPlease select a ship to place: ");
             menu = int.Parse(Console.ReadLine());
 
             if (menu > ships.Count() || menu < 0)
             {
                 while (menu > ships.Count() || menu < 0)
                 {
-                    Console.WriteLine("Please select a ship to place, press <Enter> to place: ");
+                    Console.Write("\r\nPlease select a ship to place: ");
                     menu = int.Parse(Console.ReadLine());
                 }
             }
@@ -72,6 +68,11 @@ public class Human: Player
             while (!Console.KeyAvailable && input != ConsoleKey.Enter)
             {
                 Console.Clear();
+
+                Console.WriteLine(" Movement:   Rotate (R)");
+                Console.WriteLine("     W");
+                Console.WriteLine("   A S D\r\n");
+                Console.WriteLine("Press <Enter> to place.\r\n");
 
                 Console.WriteLine("  0  1  2  3  4  5  6  7  8  9");
 
