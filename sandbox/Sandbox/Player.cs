@@ -3,8 +3,8 @@ using System;
 public abstract class Player
 {
     private string _name;
-    private Peg[,] _playerPeg = new Peg[10, 10];
-    private Peg[,] _opponentPeg = new Peg[10, 10];
+    private Cell[,] _playerCell = new Cell[10, 10];
+    private Cell[,] _opponentCell = new Cell[10, 10];
     
     public Player()
     {
@@ -12,7 +12,7 @@ public abstract class Player
         {
             for (int j = 0; j < 10; j++)
             {
-                _opponentPeg[i, j] = new Peg();
+                _opponentCell[i, j] = new Cell();
             }
         }
     }
@@ -22,24 +22,24 @@ public abstract class Player
         _name = name;
     }
 
-    public Peg[,] GetPlayerPegs()
+    public Cell[,] GetPlayerCells()
     {
-        return _playerPeg;
+        return _playerCell;
     }
 
-    public void SetPlayerPegs(Peg[,] pegs)
+    public void SetPlayerCells(Cell[,] cells)
     {
-        _playerPeg = pegs;
+        _playerCell = cells;
     }
 
-    public Peg[,] GetOpponentPegs()
+    public Cell[,] GetOpponentCells()
     {
-        return _playerPeg;
+        return _opponentCell;
     }
 
-    public void SetOpponentPegs(Peg[,] pegs)
+    public void SetOpponentCells(Cell[,] cells)
     {
-        _opponentPeg = pegs;
+        _opponentCell = cells;
     }
 
 
@@ -50,7 +50,7 @@ public abstract class Player
         {
             for (int j = 0; j < 10; j++)
             {
-                indicators[i, j] = _playerPeg[i, j].GetIndicator();
+                indicators[i, j] = _playerCell[i, j].GetIndicator();
             }
         }
         return indicators;
@@ -63,8 +63,9 @@ public abstract class Player
         {
             for (int j = 0; j < 10; j++)
             {
-                indicators[i, j] = _opponentPeg[i, j].GetIndicator();
+                indicators[i, j] = _opponentCell[i, j].GetIndicator();
             }
+            Console.WriteLine();
         }
         return indicators;
     }
@@ -76,7 +77,7 @@ public abstract class Player
         {
             for (int j = 0; j < 10; j++)
             {
-                statuses[i, j] = _opponentPeg[i, j].GetStatus();
+                statuses[i, j] = _playerCell[i, j].GetStatus();
             }
         }
         return statuses;
@@ -85,24 +86,24 @@ public abstract class Player
     //Polymorphism demonstrated here:
     public abstract void RequestLocation(Status[,] statuses);
 
-    public abstract Peg[,] PlaceShips();
+    public abstract Cell[,] PlaceShips();
 
-    public Char[,] CheckLocations()
+    public Char[,] CheckLocations(Char[,] cells)
     {
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
             {
-                if (_playerPeg[i, j].GetStatus() is Status.Aircraft_Carrier or Status.Battleship or Status.Cruiser or Status.Destroyer or Status.Submarine)
+                if (_playerCell[i, j].GetStatus() is Status.Aircraft_Carrier or Status.Battleship or Status.Cruiser or Status.Destroyer or Status.Submarine)
                 {
-                    _opponentPeg[i, j].SetStatus(Status.Hit);
-                    _opponentPeg[i, j].SetIndicator('H');
+                    _opponentCell[i, j].SetStatus(Status.Hit);
+                    _opponentCell[i, j].SetIndicator('H');
                 }
 
-                else if (_playerPeg[i, j].GetStatus() == Status.Empty)
+                else if (_playerCell[i, j].GetStatus() == Status.Empty)
                 {
-                    _opponentPeg[i, j].SetStatus(Status.Miss);
-                    _opponentPeg[i, j].SetIndicator('M');
+                    _opponentCell[i, j].SetStatus(Status.Miss);
+                    _opponentCell[i, j].SetIndicator('M');
                 }
             }
         }

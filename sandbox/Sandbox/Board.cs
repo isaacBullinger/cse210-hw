@@ -17,6 +17,7 @@ public class Board
     {
         for (int i = 0; i < 10; i++)
         {
+            Console.Write($"_letters{i}");
             for (int j = 0; j < 10; j++)
             {
                 Console.Write(statuses[i, j]);
@@ -54,17 +55,18 @@ public class Board
 
     public void PopulateDisplay(Char[,] opponent)
     {
+        _display = opponent;
         Console.WriteLine(" ________________________________");
         Console.WriteLine($@"|\_______________________________\");
         Console.WriteLine("| |  0  1  2  3  4  5  6  7  8  9 |");
 
-        for (int i = 0; i < opponent.GetLength(0); i++)
+        for (int i = 0; i < _display.GetLength(0); i++)
         {
             Console.Write($"| |{_letters[i]}");
-            for (int j = 0; j < opponent.GetLength(1); j++)
+            for (int j = 0; j < _display.GetLength(1); j++)
             {
                 Console.Write("[");
-                if (opponent[i, j] != 'H' ||_display[i, j] != 'O' || _display[i, j] != 'M')
+                if (_display[i, j] != 'H' && _display[i, j] != 'O' && _display[i, j] != 'M')
                 {
                     _display[i, j] = '~';
                 }

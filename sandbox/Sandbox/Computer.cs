@@ -8,21 +8,21 @@ public class Computer: Player
     public Computer()
     {
         SetName("Computer");
-        SetPlayerPegs(PlaceShips());
+        SetPlayerCells(PlaceShips());
     }
 
-    public override Peg[,] PlaceShips()
+    public override Cell[,] PlaceShips()
     {
         int count = 0;
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = fleet.GetFleet();
-        Peg[,] pegs = new Peg[10, 10];
+        Cell[,] cells = new Cell[10, 10];
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
             {
-                pegs[i, j] = new Peg();
+                cells[i, j] = new Cell();
             }
         }
         //Testing purposes.
@@ -67,8 +67,8 @@ public class Computer: Player
                 {
                     if (indicators[i, j] != 'O' && indicators[i, j] != 'X')
                     {
-                        pegs[i, j].SetStatus(Status.Empty);
-                        pegs[i, j].SetIndicator('~');
+                        cells[i, j].SetStatus(Status.Empty);
+                        cells[i, j].SetIndicator('~');
                         indicators[i, j] = '~';
                     }
 
@@ -121,7 +121,7 @@ public class Computer: Player
                     for (int j = 0; j < 10; j++)
                     {
                         Console.Write("[");
-                        Console.Write(pegs[i, j].GetIndicator());
+                        Console.Write(cells[i, j].GetIndicator());
                         Console.Write("]");
                     }
                     Console.WriteLine();
@@ -138,8 +138,8 @@ public class Computer: Player
                     {
                         if (indicators[i, j] == '*')
                         {
-                            pegs[i, j].SetIndicator('O');
-                            pegs[i, j].SetStatus(ships[0].GetStatus());
+                            cells[i, j].SetIndicator('O');
+                            cells[i, j].SetStatus(ships[0].GetStatus());
                             indicators[i, j] = 'O';
                         }
                     }
@@ -154,31 +154,31 @@ public class Computer: Player
                 Thread.Sleep(1000);
             }
         }
-        return pegs;
+        return cells;
     }
 
     public override void RequestLocation(Status[,] statuses)
     {
         bool same = true;
-        Peg[,] pegs = GetOpponentPegs();
+        Cell[,] cells = GetOpponentCells();
 
         while (same == true)
         {
             Random random = new Random();
-            int xCoord = random.Next();
-            int yCoord = random.Next();
+            int xCoord = random.Next(9);
+            int yCoord = random.Next(9);
 
             if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
             {
-                pegs[xCoord, yCoord].SetStatus(Status.Hit);
-                pegs[xCoord, yCoord].SetIndicator('H');
+                cells[xCoord, yCoord].SetStatus(Status.Hit);
+                cells[xCoord, yCoord].SetIndicator('H');
                 same = false;
             }
 
             else if (statuses[xCoord, yCoord] == Status.Empty)
             {
-                pegs[xCoord, yCoord].SetStatus(Status.Miss);
-                pegs[xCoord, yCoord].SetIndicator('M');
+                cells[xCoord, yCoord].SetStatus(Status.Miss);
+                cells[xCoord, yCoord].SetIndicator('M');
                 same = false;
             }
 
@@ -187,6 +187,6 @@ public class Computer: Player
                 same = true;
             }
         }
-        SetOpponentPegs(pegs);
+        SetOpponentCells(cells);
     }
 }

@@ -10,14 +10,16 @@ public class Program
         bool run = true;
 
         Computer computer = new Computer();
+        Console.WriteLine("Welcome to Battleship!");
         Human human = new Human();
 
-        Console.WriteLine("Welcome to Battleship!");
+        while (run == true)
+        {
+            humanBoard.PopulateDisplay(human.GetOpponentIndicators());
+            humanBoard.PopulateBoard(human.GetPlayerIndicators());
+            human.RequestLocation(computer.GetStatuses());
 
-        humanBoard.PopulateDisplay(computer.CheckLocations());
-        humanBoard.PopulateBoard(human.GetPlayerIndicators());
-        human.RequestLocation(computer.GetStatuses());
-        
-        humanBoard.PopulateDisplay(computer.CheckLocations());
+            computer.RequestLocation(human.GetStatuses());
+        }
     }
 }

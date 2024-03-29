@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-public class Peg
+public class Cell
 {
     private char _indicator;
     private Status _status;
 
-    public Peg()
+    public Cell()
     {
         _indicator = '~';
         _status = Status.Empty;

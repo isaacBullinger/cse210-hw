@@ -8,26 +8,29 @@ public class Human: Player
     {
         Console.WriteLine("What is your name? ");
         SetName(Console.ReadLine());
-        SetPlayerPegs(PlaceShips());
+        Console.Clear();
+        SetPlayerCells(PlaceShips());
     }
 
-    public override Peg[,] PlaceShips()
+    public override Cell[,] PlaceShips()
     {
         int index = 1;
         int count = 0;
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = fleet.GetFleet();
-        Peg[,] pegs = new Peg[10, 10];
+        Cell[,] cells = new Cell[10, 10];
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
             {
-                pegs[i, j] = new Peg();
+                cells[i, j] = new Cell();
             }
         }
         bool isHorizontal = true;
         Char[,] indicators = new Char[10,10];
+
+        Console.WriteLine("Begin by placing your ships:");
 
         while (count < 5)
         {
@@ -127,8 +130,8 @@ public class Human: Player
                     {
                         if (indicators[i, j] != 'O' && indicators[i, j] != 'X')
                         {
-                            pegs[i, j].SetStatus(Status.Empty);
-                            pegs[i, j].SetIndicator('~');
+                            cells[i, j].SetStatus(Status.Empty);
+                            cells[i, j].SetIndicator('~');
                             indicators[i, j] = '~';
                         }
 
@@ -199,8 +202,8 @@ public class Human: Player
                     {
                         if (indicators[i, j] == '*')
                         {
-                            pegs[i, j].SetIndicator('O');
-                            pegs[i, j].SetStatus(ships[0].GetStatus());
+                            cells[i, j].SetIndicator('O');
+                            cells[i, j].SetStatus(ships[0].GetStatus());
                             indicators[i, j] = 'O';
                         }
                     }
@@ -214,15 +217,16 @@ public class Human: Player
             {
                 Console.Clear();
                 Console.WriteLine("Ships overlap, try again...\r\n");
+                Thread.Sleep(3000);
             }
         }
-        return pegs;
+        return cells;
     }
 
     public override void RequestLocation(Status[,] statuses)
     {
         bool same = true;
-        Peg[,] pegs = GetOpponentPegs();
+        Cell[,] cells = GetOpponentCells();
 
         while (same == true)
         {
@@ -275,24 +279,26 @@ public class Human: Player
             Console.Write("Choose a number (0-9): ");
             int yCoord = int.Parse(Console.ReadLine());
 
-            if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
+            if (statuses[xCoord, yCoord] == Status.Hit || statuses[xCoord, yCoord] == Status.Miss || statuses[xCoord, yCoord] == Status.Sink)
             {
-                pegs[xCoord, yCoord].SetStatus(Status.Hit);
+                same = true;
+                Console.WriteLine("Location already chosen, please try again.");
+            }
+
+            else if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
+            {
+                cells[xCoord, yCoord].SetStatus(Status.Hit);
+                cells[xCoord, yCoord].SetIndicator('H');
                 same = false;
             }
 
             else if (statuses[xCoord, yCoord] == Status.Empty)
             {
-                pegs[xCoord, yCoord].SetStatus(Status.Miss);
+                cells[xCoord, yCoord].SetStatus(Status.Miss);
+                cells[xCoord, yCoord].SetIndicator('M');
                 same = false;
             }
-
-            else if (statuses[xCoord, yCoord] == Status.Hit || statuses[xCoord, yCoord] == Status.Miss || statuses[xCoord, yCoord] == Status.Sink)
-            {
-                same = true;
-                Console.WriteLine("Location already chosen, please try again.");
-            }
         }
-        SetOpponentPegs(pegs);
+        SetOpponentCells(cells);
     }
 }
