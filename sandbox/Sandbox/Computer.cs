@@ -8,23 +8,31 @@ public class Computer: Player
     public Computer()
     {
         SetName("Computer");
-        SetPositions(PlaceShips());
+        SetPlayerPegs(PlaceShips());
     }
 
-    public override String[,] PlaceShips()
+    public override Peg[,] PlaceShips()
     {
         int count = 0;
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
         List<Ship> ships = fleet.GetFleet();
-        Status[,] statuses = new Status[10, 10];
+        Peg[,] pegs = new Peg[10, 10];
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                pegs[i, j] = new Peg();
+            }
+        }
+        //Testing purposes.
         bool display = false;
         bool isHorizontal;
-        String[,] positions = new String[10,10];
+        //For displaying the placement:
+        Char[,] indicators = new Char[10,10];
 
         while (count < 5)
         {
-
             bool isOverlap = false;
             int hitPoints = ships[0].GetHP();
             hitPoints--;
@@ -57,15 +65,16 @@ public class Computer: Player
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (positions[i, j] != "O" && positions[i, j] != "X")
+                    if (indicators[i, j] != 'O' && indicators[i, j] != 'X')
                     {
-                        positions[i, j] = "~";
-                        statuses[i, j] = Status.Empty;
+                        pegs[i, j].SetStatus(Status.Empty);
+                        pegs[i, j].SetIndicator('~');
+                        indicators[i, j] = '~';
                     }
 
-                    if (positions[i, j] == "X")
+                    if (indicators[i, j] == 'X')
                     {
-                        positions[i, j] = "O";
+                        indicators[i, j] = 'O';
                     }
                 }
             }
@@ -74,15 +83,15 @@ public class Computer: Player
             {
                 for (int i = _moveY; i <= _moveY + hitPoints; i++)
                 {
-                    if (positions[_moveX, i] == "O")
+                    if (indicators[_moveX, i] == 'O')
                     {
-                        positions[_moveX, i] = "X";
+                        indicators[_moveX, i] = 'X';
                         isOverlap = true;
                     }
 
                     else
                     {
-                        positions[_moveX, i] = "*";
+                        indicators[_moveX, i] = '*';
                     }
                 }
             }
@@ -91,15 +100,15 @@ public class Computer: Player
             {
                 for (int i = _moveX; i <= _moveX + hitPoints; i++)
                 {
-                    if (positions[i, _moveY] == "O")
+                    if (indicators[i, _moveY] == 'O')
                     {
-                        positions[i, _moveY] = "X";
+                        indicators[i, _moveY] = 'X';
                         isOverlap = true;
                     }
 
-                    else if (positions[i, _moveY] != "X")
+                    else if (indicators[i, _moveY] != 'X')
                     {
-                        positions[i, _moveY] = "*";
+                        indicators[i, _moveY] = '*';
                     }
                 }
             }
@@ -112,7 +121,7 @@ public class Computer: Player
                     for (int j = 0; j < 10; j++)
                     {
                         Console.Write("[");
-                        Console.Write(positions[i, j]);
+                        Console.Write(pegs[i, j].GetIndicator());
                         Console.Write("]");
                     }
                     Console.WriteLine();
@@ -127,10 +136,11 @@ public class Computer: Player
                 {
                     for (int j = 0; j < 10; j++)
                     {
-                        if (positions[i, j] == "*")
+                        if (indicators[i, j] == '*')
                         {
-                            positions[i, j] = "O";
-                            statuses[i, j] = ships[0].GetStatus();
+                            pegs[i, j].SetIndicator('O');
+                            pegs[i, j].SetStatus(ships[0].GetStatus());
+                            indicators[i, j] = 'O';
                         }
                     }
                 }
@@ -144,13 +154,13 @@ public class Computer: Player
                 Thread.Sleep(1000);
             }
         }
-        SetStatuses(statuses);
-        return positions;
+        return pegs;
     }
 
-    public override void RequestLocation(String[,] positions)
+    public override void RequestLocation(Status[,] statuses)
     {
         bool same = true;
+        Peg[,] pegs = GetOpponentPegs();
 
         while (same == true)
         {
@@ -158,27 +168,25 @@ public class Computer: Player
             int xCoord = random.Next();
             int yCoord = random.Next();
 
-            Peg peg = new Peg(xCoord, yCoord);
-
-            if (peg.GetStatus() == Status.Aircraft_Carrier || peg.GetStatus() == Status.Battleship || peg.GetStatus() == Status.Cruiser || peg.GetStatus() == Status.Destroyer || peg.GetStatus() == Status.Submarine)
+            if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
             {
-                peg.SetStatus(Status.Hit);
+                pegs[xCoord, yCoord].SetStatus(Status.Hit);
+                pegs[xCoord, yCoord].SetIndicator('H');
                 same = false;
-                //AddPeg(peg);
             }
 
-            else if (peg.GetStatus() == Status.Empty)
+            else if (statuses[xCoord, yCoord] == Status.Empty)
             {
-                peg.SetStatus(Status.Miss);
+                pegs[xCoord, yCoord].SetStatus(Status.Miss);
+                pegs[xCoord, yCoord].SetIndicator('M');
                 same = false;
-                //AddPeg(peg);
             }
 
-            else if (peg.GetStatus() == Status.Hit || peg.GetStatus() == Status.Miss || peg.GetStatus() == Status.Sink)
+            else if (statuses[xCoord, yCoord] == Status.Hit || statuses[xCoord, yCoord] == Status.Miss || statuses[xCoord, yCoord] == Status.Sink)
             {
                 same = true;
-                Console.WriteLine("Location already chosen, please try again.");
             }
         }
+        SetOpponentPegs(pegs);
     }
 }

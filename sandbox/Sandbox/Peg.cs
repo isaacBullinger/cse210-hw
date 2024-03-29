@@ -5,14 +5,23 @@ using System.Reflection;
 
 public class Peg
 {
+    private char _indicator;
     private Status _status;
-    private int _xCoord;
-    private int _yCoord;
 
-    public Peg(int xCoord, int yCoord)
+    public Peg()
     {
-        _xCoord = xCoord;
-        _yCoord = yCoord;
+        _indicator = '~';
+        _status = Status.Empty;
+    }
+
+    public char GetIndicator()
+    {
+        return _indicator;
+    }
+
+    public void SetIndicator(char indicator)
+    {
+        _indicator = indicator;
     }
 
     public Status GetStatus()
@@ -23,15 +32,5 @@ public class Peg
     public void SetStatus(Status status)
     {
         _status = status;
-    }
-
-    public int GetX()
-    {
-        return _xCoord;
-    }
-
-    public int GetY()
-    {
-        return _yCoord;
     }
 }

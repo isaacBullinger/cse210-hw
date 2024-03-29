@@ -5,17 +5,19 @@ public class Program
 {
     static void Main(string[] args)
     {
-        Board board = new Board();
+        Board humanBoard = new Board();
+        Board computerBoard = new Board();
         bool run = true;
 
         Computer computer = new Computer();
-        //Human human = new Human();
+        Human human = new Human();
 
         Console.WriteLine("Welcome to Battleship!");
 
-        board.PopulateDisplay();
-        board.PopulateBoard(computer.GetPostions());
-
-        board.DisplayStatus(computer.GetStatuses());
+        humanBoard.PopulateDisplay(computer.CheckLocations());
+        humanBoard.PopulateBoard(human.GetPlayerIndicators());
+        human.RequestLocation(computer.GetStatuses());
+        
+        humanBoard.PopulateDisplay(computer.CheckLocations());
     }
 }

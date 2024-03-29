@@ -8,10 +8,11 @@ using System.Security.Cryptography.X509Certificates;
 
 public class Board
 {
-    private String[,] _board = new String[10, 10];
-    private String[,] _display = new String[10, 10];
+    private Char[,] _board = new Char[10, 10];
+    private Char[,] _display = new Char[10, 10];
     private string _letters = "ABCDEFGHIJ";
     
+    //Testing purposes.
     public void DisplayStatus(Status[,] statuses)
     {
         for (int i = 0; i < 10; i++)
@@ -24,7 +25,7 @@ public class Board
         }
     }
 
-    public void PopulateBoard(String[,] ships)
+    public void PopulateBoard(Char[,] ships)
     {
         _board = ships;
         string space = " ";
@@ -36,10 +37,10 @@ public class Board
             for (int j = 0; j < _board.GetLength(1); j++)
             {
                 Console.Write(@"\");
-                if (_board[i, j] != "H" && _board[i, j] != "O" && _board[i, j] != "M")
+                if (_board[i, j] != 'H' && _board[i, j] != 'O' && _board[i, j] != 'M')
                 {
                     // check if is null
-                    _board[i, j] = "~";
+                    _board[i, j] = '~';
                 }
                 Console.Write($"{_board[i, j]}");
                 Console.Write(@"\");
@@ -51,21 +52,21 @@ public class Board
         Console.WriteLine(@"             \|___________BATTLESHIP___________|");
     }
 
-    public void PopulateDisplay()
+    public void PopulateDisplay(Char[,] opponent)
     {
         Console.WriteLine(" ________________________________");
         Console.WriteLine($@"|\_______________________________\");
         Console.WriteLine("| |  0  1  2  3  4  5  6  7  8  9 |");
 
-        for (int i = 0; i < _display.GetLength(0); i++)
+        for (int i = 0; i < opponent.GetLength(0); i++)
         {
             Console.Write($"| |{_letters[i]}");
-            for (int j = 0; j < _display.GetLength(1); j++)
+            for (int j = 0; j < opponent.GetLength(1); j++)
             {
                 Console.Write("[");
-                if (_display[i, j] != "H" ||_display[i, j] != "O" || _display[i, j] != "M")
+                if (opponent[i, j] != 'H' ||_display[i, j] != 'O' || _display[i, j] != 'M')
                 {
-                    _display[i, j] = "~";
+                    _display[i, j] = '~';
                 }
                 Console.Write($"{_display[i, j]}");
                 Console.Write("]");
