@@ -232,6 +232,7 @@ public class Human: Player
         {
             int xCoord = 0;
 
+            //Input validation.
             Console.Write("Choose a letter (A-J): ");
             string letter = Console.ReadLine();
 
@@ -276,6 +277,7 @@ public class Human: Player
                 xCoord = 9;
             }
 
+            //Input validation.
             Console.Write("Choose a number (0-9): ");
             int yCoord = int.Parse(Console.ReadLine());
 

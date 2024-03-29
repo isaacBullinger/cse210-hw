@@ -30,6 +30,7 @@ public class Computer: Player
         bool isHorizontal;
         //For displaying the placement:
         Char[,] indicators = new Char[10,10];
+        Random random = new Random();
 
         while (count < 5)
         {
@@ -37,7 +38,6 @@ public class Computer: Player
             int hitPoints = ships[0].GetHP();
             hitPoints--;
 
-            Random random = new Random();
             int randomOrientation = random.Next(0,2);
 
             if (randomOrientation == 1)
@@ -161,10 +161,10 @@ public class Computer: Player
     {
         bool same = true;
         Cell[,] cells = GetOpponentCells();
+        Random random = new Random();
 
         while (same == true)
         {
-            Random random = new Random();
             int xCoord = random.Next(9);
             int yCoord = random.Next(9);
 
