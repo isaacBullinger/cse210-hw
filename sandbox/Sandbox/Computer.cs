@@ -26,7 +26,7 @@ public class Computer: Player
             }
         }
         //Testing purposes.
-        bool display = false;
+        bool display = true;
         bool isHorizontal;
         //For displaying the placement:
         Char[,] indicators = new Char[10,10];
