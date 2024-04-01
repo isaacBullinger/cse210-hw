@@ -70,7 +70,7 @@ public abstract class Player
         return indicators;
     }
 
-    public Status[,] GetStatuses()
+    public Status[,] GetPlayerStatuses()
     {
         Status[,] statuses = new Status[10, 10];
         for (int i = 0; i < 10; i++)
@@ -83,31 +83,48 @@ public abstract class Player
         return statuses;
     }
 
-    //Polymorphism demonstrated here:
-    public abstract void RequestLocation(Status[,] statuses);
+    public Status[,] GetOpponentStatuses()
+    {
+        Status[,] statuses = new Status[10, 10];
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                statuses[i, j] = _opponentCell[i, j].GetStatus();
+            }
+        }
+        return statuses;
+    }
 
+    //Polymorphism demonstrated here:
+    public abstract void RequestLocation(Status[,] opponentStatuses);
+
+    //Polymorphism demonstrated here:
     public abstract Cell[,] PlaceShips();
 
-    public Char[,] CheckLocations(Char[,] cells)
+    public void CheckLocations(Status[,] opponentCells)
     {
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
             {
-                if (_playerCell[i, j].GetStatus() is Status.Aircraft_Carrier or Status.Battleship or Status.Cruiser or Status.Destroyer or Status.Submarine)
+                if (opponentCells[i, j] == Status.Hit)
                 {
-                    _opponentCell[i, j].SetStatus(Status.Hit);
-                    _opponentCell[i, j].SetIndicator('H');
+                    _playerCell[i, j].SetStatus(Status.Hit);
+                    _playerCell[i, j].SetIndicator('H');
                 }
 
-                else if (_playerCell[i, j].GetStatus() == Status.Empty)
+                else if (opponentCells[i, j] == Status.Miss)
                 {
-                    _opponentCell[i, j].SetStatus(Status.Miss);
-                    _opponentCell[i, j].SetIndicator('M');
+                    _playerCell[i, j].SetStatus(Status.Miss);
+                    _playerCell[i, j].SetIndicator('M');
                 }
             }
         }
-        Char [,] indicators = GetOpponentIndicators();
-        return indicators;
+    }
+
+    public void CheckWin()
+    {
+        //Checks if all of the ships are destroyed.
     }
 }

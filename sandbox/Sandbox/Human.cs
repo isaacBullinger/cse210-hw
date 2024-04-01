@@ -125,6 +125,7 @@ public class Human: Player
                     }
                 }
 
+                //Start here
                 for (int i = 0; i < 10; i++)
                 {
                     for (int j = 0; j < 10; j++)
@@ -142,6 +143,7 @@ public class Human: Player
                         }
                     }
                 }
+                //End here
 
                 if (isHorizontal == true)
                 {
@@ -224,10 +226,10 @@ public class Human: Player
         return cells;
     }
 
-    public override void RequestLocation(Status[,] statuses)
+    public override void RequestLocation(Status[,] opponentStatuses)
     {
         bool same = true;
-        Cell[,] cells = GetOpponentCells();
+        Cell[,] opponentCells = GetOpponentCells();
 
         while (same == true)
         {
@@ -282,26 +284,26 @@ public class Human: Player
             Console.Write("Choose a number (0-9): ");
             int yCoord = int.Parse(Console.ReadLine());
 
-            if (statuses[xCoord, yCoord] == Status.Hit || statuses[xCoord, yCoord] == Status.Miss || statuses[xCoord, yCoord] == Status.Sink)
+            if (opponentStatuses[xCoord, yCoord] == Status.Hit || opponentStatuses[xCoord, yCoord] == Status.Miss || opponentStatuses[xCoord, yCoord] == Status.Sink)
             {
                 same = true;
                 Console.WriteLine("Location already chosen, please try again.");
             }
 
-            else if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
+            else if (opponentStatuses[xCoord, yCoord] == Status.Aircraft_Carrier || opponentStatuses[xCoord, yCoord] == Status.Battleship || opponentStatuses[xCoord, yCoord] == Status.Cruiser || opponentStatuses[xCoord, yCoord] == Status.Destroyer || opponentStatuses[xCoord, yCoord] == Status.Submarine)
             {
-                cells[xCoord, yCoord].SetStatus(Status.Hit);
-                cells[xCoord, yCoord].SetIndicator('H');
+                opponentCells[xCoord, yCoord].SetStatus(Status.Hit);
+                opponentCells[xCoord, yCoord].SetIndicator('H');
                 same = false;
             }
 
-            else if (statuses[xCoord, yCoord] == Status.Empty)
+            else if (opponentStatuses[xCoord, yCoord] == Status.Empty)
             {
-                cells[xCoord, yCoord].SetStatus(Status.Miss);
-                cells[xCoord, yCoord].SetIndicator('M');
+                opponentCells[xCoord, yCoord].SetStatus(Status.Miss);
+                opponentCells[xCoord, yCoord].SetIndicator('M');
                 same = false;
             }
         }
-        SetOpponentCells(cells);
+        SetOpponentCells(opponentCells);
     }
 }

@@ -6,7 +6,6 @@ public class Program
     static void Main(string[] args)
     {
         Board humanBoard = new Board();
-        Board computerBoard = new Board();
         bool run = true;
 
         Computer computer = new Computer();
@@ -17,9 +16,10 @@ public class Program
         {
             humanBoard.PopulateDisplay(human.GetOpponentIndicators());
             humanBoard.PopulateBoard(human.GetPlayerIndicators());
-            human.RequestLocation(computer.GetStatuses());
+            human.RequestLocation(computer.GetPlayerStatuses());
 
-            computer.RequestLocation(human.GetStatuses());
+            computer.RequestLocation(human.GetPlayerStatuses());
+            human.CheckLocations(computer.GetOpponentStatuses());
         }
     }
 }

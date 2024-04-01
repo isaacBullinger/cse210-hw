@@ -61,6 +61,7 @@ public class Computer: Player
                 Console.WriteLine("  0  1  2  3  4  5  6  7  8  9");
             }
 
+            //Start here
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -78,6 +79,7 @@ public class Computer: Player
                     }
                 }
             }
+            //End here
 
             if (isHorizontal == true)
             {
@@ -121,14 +123,13 @@ public class Computer: Player
                     for (int j = 0; j < 10; j++)
                     {
                         Console.Write("[");
-                        Console.Write(cells[i, j].GetIndicator());
+                        Console.Write(indicators[i, j]);
                         Console.Write("]");
                     }
                     Console.WriteLine();
                 }
             }
 
-            Console.WriteLine();
 
             if (isOverlap == false)
             {
@@ -144,7 +145,6 @@ public class Computer: Player
                         }
                     }
                 }
-                
                 count++;
                 ships.RemoveAt(0);
             }
@@ -157,10 +157,10 @@ public class Computer: Player
         return cells;
     }
 
-    public override void RequestLocation(Status[,] statuses)
+    public override void RequestLocation(Status[,] opponentStatuses)
     {
         bool same = true;
-        Cell[,] cells = GetOpponentCells();
+        Cell[,] opponentCells = GetOpponentCells();
         Random random = new Random();
 
         while (same == true)
@@ -168,25 +168,25 @@ public class Computer: Player
             int xCoord = random.Next(9);
             int yCoord = random.Next(9);
 
-            if (statuses[xCoord, yCoord] == Status.Aircraft_Carrier || statuses[xCoord, yCoord] == Status.Battleship || statuses[xCoord, yCoord] == Status.Cruiser || statuses[xCoord, yCoord] == Status.Destroyer || statuses[xCoord, yCoord] == Status.Submarine)
+            if (opponentStatuses[xCoord, yCoord] == Status.Aircraft_Carrier || opponentStatuses[xCoord, yCoord] == Status.Battleship || opponentStatuses[xCoord, yCoord] == Status.Cruiser || opponentStatuses[xCoord, yCoord] == Status.Destroyer || opponentStatuses[xCoord, yCoord] == Status.Submarine)
             {
-                cells[xCoord, yCoord].SetStatus(Status.Hit);
-                cells[xCoord, yCoord].SetIndicator('H');
+                opponentCells[xCoord, yCoord].SetStatus(Status.Hit);
+                opponentCells[xCoord, yCoord].SetIndicator('H');
                 same = false;
             }
 
-            else if (statuses[xCoord, yCoord] == Status.Empty)
+            else if (opponentStatuses[xCoord, yCoord] == Status.Empty)
             {
-                cells[xCoord, yCoord].SetStatus(Status.Miss);
-                cells[xCoord, yCoord].SetIndicator('M');
+                opponentCells[xCoord, yCoord].SetStatus(Status.Miss);
+                opponentCells[xCoord, yCoord].SetIndicator('M');
                 same = false;
             }
 
-            else if (statuses[xCoord, yCoord] == Status.Hit || statuses[xCoord, yCoord] == Status.Miss || statuses[xCoord, yCoord] == Status.Sink)
+            else if (opponentStatuses[xCoord, yCoord] == Status.Hit || opponentStatuses[xCoord, yCoord] == Status.Miss || opponentStatuses[xCoord, yCoord] == Status.Sink)
             {
                 same = true;
             }
         }
-        SetOpponentCells(cells);
+        SetOpponentCells(opponentCells);
     }
 }
