@@ -18,7 +18,8 @@ public class Human: Player
         int count = 0;
         string letters = "ABCDEFGHIJ";
         Fleet fleet = new Fleet();
-        List<Ship> ships = fleet.GetFleet();
+        List<Ship> trackShips = fleet.GetFleet();
+        List <Ship> humanShips = new List<Ship>();
         Cell[,] cells = new Cell[10, 10];
         for (int i = 0; i < 10; i++)
         {
@@ -40,7 +41,7 @@ public class Human: Player
             int moveY = 0;
             int menu;
 
-            foreach (Ship ship in ships)
+            foreach (Ship ship in trackShips)
             {
                 ship.DisplayShip(index);
                 index++;
@@ -49,20 +50,14 @@ public class Human: Player
             index = 1;
 
             Console.Write("\r\nPlease select a ship to place: ");
-            menu = int.Parse(Console.ReadLine());
-
-            if (menu > ships.Count() || menu < 0)
+            while (!int.TryParse(Console.ReadLine(), out menu) || menu > trackShips.Count() || menu <= 0)
             {
-                while (menu > ships.Count() || menu < 0)
-                {
-                    Console.Write("\r\nPlease select a ship to place: ");
-                    menu = int.Parse(Console.ReadLine());
-                }
+                Console.Write("Invalid input. Please select a ship to place: ");
             }
-            
+
             menu--;
 
-            int hitPoints = ships[menu].GetHP();
+            int hitPoints = trackShips[menu].GetHP();
             hitPoints--;
 
             while (!Console.KeyAvailable && input != ConsoleKey.Enter)
@@ -133,8 +128,8 @@ public class Human: Player
                         if (indicators[i, j] != 'O' && indicators[i, j] != 'X')
                         {
                             cells[i, j].SetStatus(Status.Empty);
-                            cells[i, j].SetIndicator('~');
-                            indicators[i, j] = '~';
+                            cells[i, j].SetIndicator(' ');
+                            indicators[i, j] = ' ';
                         }
 
                         if (indicators[i, j] == 'X')
@@ -183,6 +178,17 @@ public class Human: Player
 
                 for (int i = 0; i < 10; i++)
                 {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (indicators[i, j] == 'X')
+                        {
+                            isOverlap = true;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
                     Console.Write($"{letters[i]}");
                     for (int j = 0; j < 10; j++)
                     {
@@ -206,13 +212,14 @@ public class Human: Player
                         if (indicators[i, j] == '*')
                         {
                             cells[i, j].SetIndicator('O');
-                            cells[i, j].SetStatus(ships[0].GetStatus());
+                            cells[i, j].SetStatus(trackShips[0].GetStatus());
                             indicators[i, j] = 'O';
                         }
                     }
                 }
                 count++;
-                ships.RemoveAt(menu);
+                humanShips.Add(trackShips[menu]);
+                trackShips.RemoveAt(menu);
                 Console.Clear();
             }
 
@@ -223,6 +230,7 @@ public class Human: Player
                 Thread.Sleep(3000);
             }
         }
+        SetFleet(humanShips);
         return cells;
     }
 
@@ -235,54 +243,23 @@ public class Human: Player
         {
             int xCoord = 0;
 
-            //Input validation.
             Console.Write("Choose a letter (A-J): ");
-            string letter = Console.ReadLine();
+            string letter = Console.ReadLine().ToUpper();
 
-            if (letter == "A" || letter == "a")
+            if (letter.Length != 1 || !char.IsLetter(letter[0]) || letter[0] < 'A' || letter[0] > 'J')
             {
-                xCoord = 0;
-            }
-            else if (letter == "B" || letter == "b")
-            {
-                xCoord = 1;
-            }
-            else if (letter == "C" || letter == "c")
-            {
-                xCoord = 2;
-            }
-            else if (letter == "D" || letter == "d")
-            {
-                xCoord = 3;
-            }
-            else if (letter == "E" || letter == "e")
-            {
-                xCoord = 4;
-            }
-            else if (letter == "F" || letter == "f")
-            {
-                xCoord = 5;
-            }
-            else if (letter == "G" || letter == "g")
-            {
-                xCoord = 6;
-            }
-            else if (letter == "H" || letter == "h")
-            {
-                xCoord = 7;
-            }
-            else if (letter == "I" || letter == "i")
-            {
-                xCoord = 8;
-            }
-            else if (letter == "J" || letter == "j")
-            {
-                xCoord = 9;
+                Console.WriteLine("Invalid input, please choose a letter (A-J)");
+                continue;
             }
 
-            //Input validation.
+            xCoord = letter[0] - 'A';
+
             Console.Write("Choose a number (0-9): ");
-            int yCoord = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int yCoord) || yCoord < 0 || yCoord > 9)
+            {
+                Console.WriteLine("Invalid input, please choose a number between (0-9)");
+                continue;
+            }
 
             if (opponentStatuses[xCoord, yCoord] == Status.Hit || opponentStatuses[xCoord, yCoord] == Status.Miss || opponentStatuses[xCoord, yCoord] == Status.Sink)
             {

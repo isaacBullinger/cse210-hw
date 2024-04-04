@@ -1,10 +1,18 @@
 using System;
+using System.ComponentModel;
 
 public abstract class Player
 {
     private string _name;
+    private List<Ship> _ships = new List<Ship>();
     private Cell[,] _playerCell = new Cell[10, 10];
     private Cell[,] _opponentCell = new Cell[10, 10];
+    private bool _aircraftMessage = false;
+    private bool _battleshipMessage = false;
+    private bool _destroyerMessage = false;
+    private bool _submarineMessage = false;
+    private bool _cruiserMessage = false;
+
     
     public Player()
     {
@@ -17,14 +25,19 @@ public abstract class Player
         }
     }
 
+    public List<Ship> GetFleet()
+    {
+        return _ships;
+    }
+
+    public void SetFleet(List<Ship> fleet)
+    {
+        _ships = fleet;
+    }
+
     public void SetName (string name)
     {
         _name = name;
-    }
-
-    public Cell[,] GetPlayerCells()
-    {
-        return _playerCell;
     }
 
     public void SetPlayerCells(Cell[,] cells)
@@ -65,7 +78,6 @@ public abstract class Player
             {
                 indicators[i, j] = _opponentCell[i, j].GetIndicator();
             }
-            Console.WriteLine();
         }
         return indicators;
     }
@@ -123,8 +135,120 @@ public abstract class Player
         }
     }
 
-    public void CheckWin()
+    public void CheckShips(Status[,] opponentStatuses)
     {
-        //Checks if all of the ships are destroyed.
+        int aircraftCount = 0;
+        int battleshipCount = 0;
+        int destroyerCount = 0;
+        int submarineCount = 0;
+        int cruiserCount = 0;
+
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if (_playerCell[i, j].GetStatus() == Status.Aircraft_Carrier)
+                {
+                    aircraftCount++;
+                }
+
+                if (_playerCell[i, j].GetStatus() == Status.Battleship)
+                {
+                    battleshipCount++;
+                }
+
+                if (_playerCell[i ,j].GetStatus() == Status.Destroyer)
+                {
+                    destroyerCount++;
+                }
+
+                if (_playerCell[i, j].GetStatus() == Status.Submarine)
+                {
+                    submarineCount++;
+                }
+
+                if (_playerCell[i, j].GetStatus() == Status.Cruiser)
+                {
+                    cruiserCount++;
+                }
+
+            }
+        }
+        if (aircraftCount == 0 && _aircraftMessage == false)
+        {
+            foreach (Ship ship in _ships)
+            {
+                if (ship.GetStatus() == Status.Aircraft_Carrier)
+                {
+                    ship.SetIsSunk(true);
+                }
+            }
+            Console.WriteLine("You sunk the enemy aircraft carrier!");
+            _aircraftMessage = true;
+        }
+
+        if (battleshipCount == 0 && _battleshipMessage == false)
+        {
+            foreach (Ship ship in _ships)
+            {
+                if (ship.GetStatus() == Status.Battleship)
+                {
+                    ship.SetIsSunk(true);
+                }
+            }
+            Console.WriteLine("You sunk the enemy battleship!");
+            _battleshipMessage = true;
+        }
+        
+        if (destroyerCount == 0 && _destroyerMessage == false)
+        {
+            foreach (Ship ship in _ships)
+            {
+                if (ship.GetStatus() == Status.Destroyer)
+                {
+                    ship.SetIsSunk(true);
+                }
+            }
+            Console.WriteLine("You sunk the enemy destroyer!");
+            _destroyerMessage = true;
+        }
+        
+        if (submarineCount == 0 && _submarineMessage == false)
+        {
+            foreach (Ship ship in _ships)
+            {
+                if (ship.GetStatus() == Status.Submarine)
+                {
+                    ship.SetIsSunk(true);
+                }
+            }
+            Console.WriteLine("You sunk the enemy submarine!");
+            _submarineMessage = true;
+        }
+        
+        if (cruiserCount == 0 && _cruiserMessage == false)
+        {
+            foreach (Ship ship in _ships)
+            {
+                if (ship.GetStatus() == Status.Cruiser)
+                {
+                    ship.SetIsSunk(true);
+                }
+            }
+            Console.WriteLine("You sunk the enemy cruiser!");
+            _cruiserMessage = true;
+        }
+    }
+
+    public bool CheckWin()
+    {
+        foreach (Ship ship in _ships)
+        {
+            if (ship.GetIsSunk() == false)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

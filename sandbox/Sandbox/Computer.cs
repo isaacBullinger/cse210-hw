@@ -26,7 +26,7 @@ public class Computer: Player
             }
         }
         //Testing purposes.
-        bool display = true;
+        bool display = false;
         bool isHorizontal;
         //For displaying the placement:
         Char[,] indicators = new Char[10,10];
@@ -69,8 +69,8 @@ public class Computer: Player
                     if (indicators[i, j] != 'O' && indicators[i, j] != 'X')
                     {
                         cells[i, j].SetStatus(Status.Empty);
-                        cells[i, j].SetIndicator('~');
-                        indicators[i, j] = '~';
+                        cells[i, j].SetIndicator(' ');
+                        indicators[i, j] = ' ';
                     }
 
                     if (indicators[i, j] == 'X')

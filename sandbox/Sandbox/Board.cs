@@ -41,7 +41,7 @@ public class Board
                 if (_board[i, j] != 'H' && _board[i, j] != 'O' && _board[i, j] != 'M')
                 {
                     // check if is null
-                    _board[i, j] = '~';
+                    _board[i, j] = ' ';
                 }
                 Console.Write($"{_board[i, j]}");
                 Console.Write(@"\");
@@ -68,7 +68,7 @@ public class Board
                 Console.Write("[");
                 if (_display[i, j] != 'H' && _display[i, j] != 'O' && _display[i, j] != 'M')
                 {
-                    _display[i, j] = '~';
+                    _display[i, j] = ' ';
                 }
                 Console.Write($"{_display[i, j]}");
                 Console.Write("]");

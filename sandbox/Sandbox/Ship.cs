@@ -36,4 +36,14 @@ public class Ship
     {
         return _hitPoints;
     }
+
+    public bool GetIsSunk()
+    {
+        return _isSunk;
+    }
+
+    public void SetIsSunk(bool isSunk)
+    {
+        _isSunk = isSunk;
+    }
 }
