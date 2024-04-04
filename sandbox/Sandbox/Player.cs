@@ -190,7 +190,7 @@ public abstract class Player
                     ship.SetStatus(Status.Sink);
                 }
             }
-            Console.WriteLine($"{name} sunk the {_name}'s aircraft carrier!");
+            Console.WriteLine($"{name} sunk {_name}'s aircraft carrier!");
             _aircraftMessage = true;
         }
 
@@ -204,7 +204,7 @@ public abstract class Player
                     ship.SetStatus(Status.Sink);
                 }
             }
-            Console.WriteLine($"{name} sunk the {_name}'s battleship!");
+            Console.WriteLine($"{name} sunk {_name}'s battleship!");
             _battleshipMessage = true;
         }
         
@@ -218,7 +218,7 @@ public abstract class Player
                     ship.SetStatus(Status.Sink);
                 }
             }
-            Console.WriteLine($"{name} sunk the {_name}'s destroyer!");
+            Console.WriteLine($"{name} sunk {_name}'s destroyer!");
             _destroyerMessage = true;
         }
         
@@ -232,7 +232,7 @@ public abstract class Player
                     ship.SetStatus(Status.Sink);
                 }
             }
-            Console.WriteLine($"{name} sunk the {_name}'s submarine!");
+            Console.WriteLine($"{name} sunk {_name}'s submarine!");
             _submarineMessage = true;
         }
         
@@ -246,7 +246,7 @@ public abstract class Player
                     ship.SetStatus(Status.Sink);
                 }
             }
-            Console.WriteLine($"{name} sunk the {_name}'s cruiser!");
+            Console.WriteLine($"{name} sunk {_name}'s cruiser!");
             _cruiserMessage = true;
         }
     }

@@ -271,6 +271,7 @@ public class Human: Player
             {
                 opponentCells[xCoord, yCoord].SetStatus(Status.Hit);
                 opponentCells[xCoord, yCoord].SetIndicator('H');
+                Console.Clear();
                 Console.WriteLine("Hit!");
                 same = false;
             }
@@ -279,6 +280,7 @@ public class Human: Player
             {
                 opponentCells[xCoord, yCoord].SetStatus(Status.Miss);
                 opponentCells[xCoord, yCoord].SetIndicator('M');
+                Console.Clear();
                 Console.WriteLine("Miss!");
                 same = false;
             }

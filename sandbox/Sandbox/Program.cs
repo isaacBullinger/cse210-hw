@@ -23,7 +23,7 @@ public class Program
 
             if (human.CheckWin())
             {
-                winner = human.GetName();
+                winner = computer.GetName();
             }
 
             computer.RequestLocation(human.GetPlayerStatuses());

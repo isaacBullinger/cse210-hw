@@ -165,8 +165,8 @@ public class Computer: Player
 
         while (same == true)
         {
-            int xCoord = random.Next(9);
-            int yCoord = random.Next(9);
+            int xCoord = random.Next(10);
+            int yCoord = random.Next(10);
 
             if (opponentStatuses[xCoord, yCoord] == Status.Aircraft_Carrier || opponentStatuses[xCoord, yCoord] == Status.Battleship || opponentStatuses[xCoord, yCoord] == Status.Cruiser || opponentStatuses[xCoord, yCoord] == Status.Destroyer || opponentStatuses[xCoord, yCoord] == Status.Submarine)
             {
