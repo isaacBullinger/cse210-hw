@@ -7,34 +7,34 @@ public class Program
     {
         Board humanBoard = new Board();
         Board computerBoard = new Board();
-        bool end = false;
-        string winner;
+        string winner = null;
 
         Computer computer = new Computer();
         Console.WriteLine("Welcome to Battleship!");
         Human human = new Human();
 
-        while (end == false)
+        while (winner == null)
         {
-            Console.WriteLine("Human");
             humanBoard.PopulateDisplay(human.GetOpponentIndicators());
             humanBoard.PopulateBoard(human.GetPlayerIndicators());
             human.RequestLocation(computer.GetPlayerStatuses());
             computer.CheckLocations(human.GetOpponentStatuses());
-            human.CheckShips(computer.GetPlayerStatuses());
+            human.CheckShips(computer.GetPlayerStatuses(), computer.GetName());
 
-            Console.WriteLine("Computer");
-            computerBoard.PopulateDisplay(computer.GetOpponentIndicators());
-            computerBoard.PopulateBoard(computer.GetPlayerIndicators());
+            if (human.CheckWin())
+            {
+                winner = human.GetName();
+            }
+
             computer.RequestLocation(human.GetPlayerStatuses());
             human.CheckLocations(computer.GetOpponentStatuses());
-            computer.CheckShips(human.GetPlayerStatuses());
+            computer.CheckShips(human.GetPlayerStatuses(), human.GetName());
 
-            end = computer.CheckWin();
-            end = human.CheckWin();
+            if (computer.CheckWin())
+            {
+                winner = human.GetName();
+            }
         }
-        Console.WriteLine("Game over");
-
-
+        Console.WriteLine($"{winner} wins!");
     }
 }

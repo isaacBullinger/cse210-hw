@@ -32,6 +32,11 @@ public class Ship
         return _status;
     }
 
+    public void SetStatus(Status status)
+    {
+        _status = status;
+    }
+
     public int GetHP()
     {
         return _hitPoints;
