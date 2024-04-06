@@ -270,7 +270,7 @@ public class Human: Player
             else if (opponentStatuses[xCoord, yCoord] == Status.Aircraft_Carrier || opponentStatuses[xCoord, yCoord] == Status.Battleship || opponentStatuses[xCoord, yCoord] == Status.Cruiser || opponentStatuses[xCoord, yCoord] == Status.Destroyer || opponentStatuses[xCoord, yCoord] == Status.Submarine)
             {
                 opponentCells[xCoord, yCoord].SetStatus(Status.Hit);
-                opponentCells[xCoord, yCoord].SetIndicator('H');
+                opponentCells[xCoord, yCoord].SetIndicator('*');
                 Console.Clear();
                 Console.WriteLine("Hit!");
                 same = false;
@@ -279,7 +279,7 @@ public class Human: Player
             else if (opponentStatuses[xCoord, yCoord] == Status.Empty)
             {
                 opponentCells[xCoord, yCoord].SetStatus(Status.Miss);
-                opponentCells[xCoord, yCoord].SetIndicator('M');
+                opponentCells[xCoord, yCoord].SetIndicator('~');
                 Console.Clear();
                 Console.WriteLine("Miss!");
                 same = false;

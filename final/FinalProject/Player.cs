@@ -4,7 +4,6 @@ using System.ComponentModel;
 public abstract class Player
 {
     private string _name;
-    private string _opponentName;
     private List<Ship> _ships = new List<Ship>();
     private Cell[,] _playerCell = new Cell[10, 10];
     private Cell[,] _opponentCell = new Cell[10, 10];
@@ -129,13 +128,13 @@ public abstract class Player
                 if (opponentCells[i, j] == Status.Hit)
                 {
                     _playerCell[i, j].SetStatus(Status.Hit);
-                    _playerCell[i, j].SetIndicator('H');
+                    _playerCell[i, j].SetIndicator('*');
                 }
 
                 else if (opponentCells[i, j] == Status.Miss)
                 {
                     _playerCell[i, j].SetStatus(Status.Miss);
-                    _playerCell[i, j].SetIndicator('M');
+                    _playerCell[i, j].SetIndicator('~');
                 }
             }
         }

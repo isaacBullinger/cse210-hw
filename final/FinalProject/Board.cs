@@ -38,9 +38,8 @@ public class Board
             for (int j = 0; j < _board.GetLength(1); j++)
             {
                 Console.Write(@"\");
-                if (_board[i, j] != 'H' && _board[i, j] != 'O' && _board[i, j] != 'M')
+                if (_board[i, j] != '*' && _board[i, j] != 'O' && _board[i, j] != '~')
                 {
-                    // check if is null
                     _board[i, j] = ' ';
                 }
                 Console.Write($"{_board[i, j]}");
@@ -66,7 +65,7 @@ public class Board
             for (int j = 0; j < _display.GetLength(1); j++)
             {
                 Console.Write("[");
-                if (_display[i, j] != 'H' && _display[i, j] != 'O' && _display[i, j] != 'M')
+                if (_display[i, j] != '*' && _display[i, j] != 'O' && _display[i, j] != '~')
                 {
                     _display[i, j] = ' ';
                 }

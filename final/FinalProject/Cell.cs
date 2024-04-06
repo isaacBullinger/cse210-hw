@@ -10,7 +10,7 @@ public class Cell
 
     public Cell()
     {
-        _indicator = '~';
+        _indicator = ' ';
         _status = Status.Empty;
     }
 
