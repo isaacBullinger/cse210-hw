@@ -9,3 +9,7 @@ Isaac Bullinger
 * `prepare` - Starter projects for each of the preparation Learning Activities.
 * `prove` - Starter projects for each of the prove Developer projects.
 * `final` - Starter projects for final project.
+
+This is a showcase of different object oriented small projects made in C#.
+
+If you go to `final` > `FinalProject` you will find an ascii game of battleship that I made.
