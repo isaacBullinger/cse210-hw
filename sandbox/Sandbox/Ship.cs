@@ -1,45 +1,21 @@
-using System;
-using System.Diagnostics;
-using System.Reflection;
-
 public class Ship
 {
-    private string _name;
-    private Status _status;
     private bool _isSunk;
+    private Cell _cell;
     private int _hitPoints;
+    private string _name;
 
-    public Ship(int hitPoints, string name, Status status)
+    public Ship(Cell cell, int hitPoints, string name)
     {
-        _name = name;
         _isSunk = false;
+        _cell = cell;
         _hitPoints = hitPoints;
-        _status = status;
+        _name = name;
     }
 
-    public void DisplayShip(int number)
+    public void DisplayShip()    
     {
-        Console.WriteLine($"{number}. {_name} ({_hitPoints} slots)");
-    }
-
-    public string GetName()
-    {
-        return _name;
-    }
-
-    public Status GetStatus()
-    {
-        return _status;
-    }
-
-    public void SetStatus(Status status)
-    {
-        _status = status;
-    }
-
-    public int GetHP()
-    {
-        return _hitPoints;
+        Console.Write($"{_name} ({_hitPoints} cells)");
     }
 
     public bool GetIsSunk()
@@ -47,8 +23,13 @@ public class Ship
         return _isSunk;
     }
 
-    public void SetIsSunk(bool isSunk)
+    public Cell GetCell()
     {
-        _isSunk = isSunk;
+        return _cell;
+    }
+
+    public string GetName()
+    {
+        return _name;
     }
 }

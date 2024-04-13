@@ -1,46 +1,23 @@
-using System;
-using System.Collections;
-using System.Dynamic;
-using System.Globalization;
-using System.IO.Compression;
-using System.Reflection.PortableExecutable;
-using System.Security.Cryptography.X509Certificates;
-
 public class Board
 {
+    // Board handles display.
     private Char[,] _board = new Char[10, 10];
     private Char[,] _display = new Char[10, 10];
     private string _letters = "ABCDEFGHIJ";
-    
-    //Testing purposes.
-    public void DisplayStatus(Status[,] statuses)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            Console.Write($"_letters{i}");
-            for (int j = 0; j < 10; j++)
-            {
-                Console.Write(statuses[i, j]);
-            }
-            Console.WriteLine();
-        }
-    }
 
-    public void PopulateBoard(Char[,] ships)
+    public void PopulateBoard(Char[,] characters)
     {
-        _board = ships;
+        _board = characters;
         string space = " ";
         for (int i = 0; i < _board.GetLength(0); i++)
         {
             Console.Write(space);
-            space = space + " ";
+            space += space;
             Console.Write(@$" \ \{_letters[i]}");
             for (int j = 0; j < _board.GetLength(1); j++)
             {
-                Console.Write(@"\");
-                if (_board[i, j] != 'H' && _board[i, j] != 'O' && _board[i, j] != 'M')
+                if (_board[i, j] != '*' && _board[i, j] != 'O' && _board[i, j] != '~')
                 {
-                    // check if is null
                     _board[i, j] = ' ';
                 }
                 Console.Write($"{_board[i, j]}");
@@ -66,7 +43,7 @@ public class Board
             for (int j = 0; j < _display.GetLength(1); j++)
             {
                 Console.Write("[");
-                if (_display[i, j] != 'H' && _display[i, j] != 'O' && _display[i, j] != 'M')
+                if (_display[i, j] != '*' && _display[i, j] != 'O' && _display[i, j] != '~')
                 {
                     _display[i, j] = ' ';
                 }

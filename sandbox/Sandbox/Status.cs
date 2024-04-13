@@ -1,12 +1,10 @@
-using System.ComponentModel;
-
 public enum Status
 {
-    Cruiser = 0,
-    Destroyer = 1,
-    Submarine = 2,
-    Battleship = 3,
-    Aircraft_Carrier = 4,
+    Cruiser,
+    Destroyer,
+    Submarine,
+    Battleship,
+    Aircraft_Carrier,
     Empty,
     Hit,
     Miss,
